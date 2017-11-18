@@ -1,0 +1,88 @@
+abbr,name,tons,faction,class
+LCT,Locust,20,IS,light
+COM,Commando,25,IS,light
+JVN,Javelin,30,IS,light
+OSR,Osiris,30,IS,light
+SPD,Spider,30,IS,light
+UM,Urbanmech,30,IS,light
+FS9,Firestarter,35,IS,light
+JR7,Jenner,35,IS,light
+PNT,Panther,35,IS,light
+RVN,Raven,35,IS,light
+WLF,Wolfhound,35,IS,light
+MLX,Mist Lynx,25,CL,light
+ACH,Arctic Cheetah,30,CL,light
+KFX,Kit Fox,30,CL,light
+COU,Adder,35,CL,light
+SPD,Cougar,30,CL,light
+JR7-IIC,Jenner IIC,35,CL,light
+ASN,Assassin,40,IS,medium
+CDA,Cicada,40,IS,medium
+BJ,Blackjack,45,IS,medium
+PXH,Phoenix Hawk,45,IS,medium
+VND,Vindicator,45,IS,medium
+CN9,Centurion,50,IS,medium
+CRB,Crab,50,IS,medium
+ENF,Enforcer,50,IS,medium
+HBK,Hunchback,50,IS,medium
+TBT,Trebuchet,50,IS,medium
+UZL,Uziel,50,IS,medium
+BSW,Bushwacker,55,IS,medium
+GRF,Griffin,55,IS,medium
+KTO,Kintaro,55,IS,medium
+SHD,Shadow Hawk,55,IS,medium
+WVR,Wolverine,55,IS,medium
+ACW,Arctic Wolf,40,CL,medium
+VPR,Viper,40,CL,medium
+IFR,Ice Ferret,45,CL,medium
+SHC,Shadow Cat,45,CL,medium
+HBK-IIC,Hunchback IIC,50,CL,medium
+HMN,Huntsman,50,CL,medium
+NVA,Nova,50,CL,medium
+SCR,Stormcrow,55,CL,medium
+DRG,Dragon,60,IS,heavy
+QKD,Quickdraw,60,IS,heavy
+RFL,Rifleman,60,IS,heavy
+CPLT,Catapult,65,IS,heavy
+JM6,Jagermech,65,IS,heavy
+RGH,Roughneck,65,IS,heavy
+TDR,Thunderbolt,65,IS,heavy
+ARC,Archer,70,IS,heavy
+CTF,Cataphract,70,IS,heavy
+GHR,Grasshopper,70,IS,heavy
+WHM,Warhammer,70,IS,heavy
+BL,Black Knight,75,IS,heavy
+MAD,Marauder,75,IS,heavy
+ON1,Orion,75,IS,heavy
+TNS,Thanatos,75,IS,heavy
+MDD,Mad Dog,60,CL,heavy
+EBJ,Ebon Jaguar,65,CL,heavy
+HBR,Hellbringer,65,CL,heavy
+LBK,Linebacker,65,CL,heavy
+NCT,Nova Cat,70,CL,heavy
+SMN,Summoner,70,CL,heavy
+NTG,Night Gyr,75,CL,heavy
+ON1-IIC,Orion IIC,75,CL,heavy
+TBR,Timber Wolf,75,CL,heavy
+AWS,Awesome,80,IS,assault
+VTR,Victor,80,IS,assault
+ZEU,Zeus,80,IS,assault
+BLR,Battlemaster,85,IS,assault
+STK,Stalker,85,IS,assault
+CP,Cyclops,90,IS,assault
+HGN,Highlander,90,IS,assault
+MAL,Mauler,90,IS,assault
+BNC,Banshee,95,IS,assault
+NSR,Nightstar,95,IS,assault
+ANH,Annihilator,100,IS,assault
+AS7,Atlas,100,IS,assault
+KGC,King Crab,100,IS,assault
+GAR,Gargoyle,80,CL,assault
+MAD-IIC,Marauder-IIC,85,CL,assault
+WHK,Warhawk,85,CL,assault
+HGN-IIC,Highlander-IIC,90,CL,assault
+MCII,Mad Cat MK II,90,CL,assault
+SNV,Supernova,90,CL,assault
+EXE,Executioner,95,CL,assault
+DWF,Dire Wolf,100,CL,assault
+KDK,Kodiak,100,CL,assault

@@ -34,6 +34,7 @@ class mechScraper(object):
             print("must pass URL")
             return
 
+        print("scraping " + url)
         page = requests.get(url)
         page_string = page.text
 
@@ -69,11 +70,8 @@ class mechScraper(object):
         """
         if not os.path.exists(path):
             os.makedirs(path)
+        print("saving data for " + weight_class)
         data.to_csv(path + weight_class + ".txt", sep="|", index=False)
-        #assualt_mech_df.to_csv("output/assault_mechs.txt", sep="|", index=False)
-        #heavy_mech_df.to_csv("output/heavy_mechs.txt", sep="|", index=False)
-        #medium_mech_df.to_csv("output/medium_mechs.txt", sep="|", index=False)
-        #light_mech_df.to_csv("output/light_mechs.txt", sep="|", index=False)
 
 
     def main(self):

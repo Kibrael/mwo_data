@@ -1,11 +1,12 @@
-import boto3
 import io
 import os
 from os import listdir
 from os.path import isfile, join
+
+import boto3
 import pandas as pd
 from PIL import Image, ImageFilter
-
+import requests
 
 
 class mwoImageSlicer(object):
@@ -31,17 +32,17 @@ class mwoImageSlicer(object):
                                 (570, 350, 1380, 372),
                                 (570, 373, 1380, 395),
                                 (570, 403, 1380, 422),
-                                (570, 425, 1380, 455),
+                                (570, 425, 1380, 450),
                                 (570, 448, 1380, 470),
                                 (570, 470, 1380, 490),
                                 (570, 505, 1380, 522),
-                                (570, 525, 1380, 547),
+                                (570, 525, 1380, 549),
                                 (570, 550, 1380, 572),
                                 (570, 570, 1380, 595),
                                 (570, 600, 1380, 620),
                                 (570, 623, 1380, 645),
                                 (570, 645, 1380, 665),
-                                (570, 667, 1380, 687),
+                                (570, 667, 1380, 689),
                                 (570, 698, 1380, 715),
                                 (570, 720, 1380, 738),
                                 (570, 742, 1380, 762),
@@ -78,9 +79,11 @@ class mwoImageSlicer(object):
 	            		"damage":[], 
 	            		"ping":[]
 		}
+
 		h_slices = self.slice_image_horizontal(img)
 		for slic in h_slices:
 			player_row_imgs = self.slice_image_vertical(slic)
+			exit()
 			#get OCR for each image in player slice
 			match_dict["clan"].append(self.get_image_ocr(player_row_imgs[0])["text"])
 			match_dict["name"].append(self.get_image_ocr(player_row_imgs[1])["text"])
@@ -129,9 +132,36 @@ class mwoImageSlicer(object):
 		"""
 			Downloads files from a target site
 
+
+		"""
+		grid_url = "https://steamcommunity.com/profiles/76561198090389241/screenshots/?appid=342200&sort=newestfirst&browsefilter=myfiles&view=grid"
+#				    https://steamcommunity.com/profiles/76561198090389241/screenshots/?p=2&appid=342200&sort=newestfirst&browsefilter=myfiles&view=grid&privacy=14
+
+		steam_mwo_url = "https://steamcommunity.com/profiles/76561198090389241/screenshots/?appid=342200"
+		#steam image url:
+		#https://steamuserimages-a.akamaihd.net/ugc/949601342893592988/26AACEA63DE6B2EB173C5FABF5766EE390BA31AA/
+		#https://steamcommunity.com/sharedfiles/filedetails/?id=1664039570
+
+	def show_image(self, img, folder="../data/images/"):
+		"""
+		Uses the PIL library to display an image
+		"""
+		print(type(img))
+
+		if type(img) == str:
+			img = Image.open(folder+img)
+
+		img.show()
+
+	def get_resolution(self, img_file, folder="../data/images/", display=False):
+		"""
+		Returns the weidth and height of an image
 		"""
 
-		pass
+		img = Image.open(folder+img_file)
+		if display:
+			img.show()
+		return img.size
 
 
 	def get_images_in_folder(self, folder="../data/images/"):
@@ -146,15 +176,16 @@ class mwoImageSlicer(object):
 		return img_files
 
 
-	def load_image(self, image_path): #this might be unnecessary
+	def load_image(self, image, folder_path="../data/images/"): #this might be unnecessary
 		"""
 			Stores an image file as a class data object for manipulation
 		"""
+		img = Image.open(folder_path+image)
+		self.current_img = img
+		return img
 
-		pass
 
-
-	def resize_image(self, img, new_width=200):
+	def resize_image(self, img, new_width=300, print_size=False):
 		"""
 			Resizes an image while maintaining aspect ratio
 		"""
@@ -162,7 +193,8 @@ class mwoImageSlicer(object):
 		width_pct = (new_width / float(img.size[0])) #get new width as a percent of old width for aspect ratio 
 		new_height = int((float(img.size[1])*float(width_pct))) #get new height based on new/old width percentage
 		img = img.resize((new_width, new_height), Image.ANTIALIAS) #resize image: AWS OCR needs minimum of 80x80 pixels
-
+		if print_size:
+			print("new size", img.size)
 		return img
 
 
@@ -179,7 +211,9 @@ class mwoImageSlicer(object):
            
         	#split image into 24 rectangles, 1 for each player
             #args are (x start, y start, x end, y end)
-			img = Image.open(self.image_folder+img)
+			if type(img) == str:
+				img = Image.open(self.image_folder+img)
+			
 			w, h = img.size
 			#winning team players are positions 1-12 (index 0-11)
 			#losing team players are positions 13-24 (index 12-23)
@@ -190,6 +224,7 @@ class mwoImageSlicer(object):
 			player_images = [] #holds one image slice (horizontal bar) for each of the 24 players
 			for player_area in self.score_1680_1050:
 			    player_images.append(img.crop(player_area))
+			    img.crop(player_area).show()
 			return player_images
 
 		else:

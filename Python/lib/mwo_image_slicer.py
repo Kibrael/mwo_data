@@ -20,7 +20,8 @@ class mwoImageSlicer(object):
 		"""
 		self.boto_client = boto_client
 		self.image_folder = "../data/images/"
-		self.save_folder = "../data/images/"
+		self.download_folder = "../data/images/"
+		self.data_save = "../output/df_from_img/"
 
 		#horizontal slicing dimensions
 		self.score_1680_1050 = [(570, 205, 1380, 230),
@@ -64,9 +65,32 @@ class mwoImageSlicer(object):
 							        	"ping_area":(760, 0, 1680, 1050)
 							         }
 
-
-	def img_to_dataframe(self, img):
+	def main(self):
 		"""
+		"""
+		#get list of images from directory
+		img_list = self.get_images_in_folder()
+		print(len(img_list), "images in folder")
+		#loop over images
+		for mwo_img in img_list:
+			#open img with PIL
+			img = self.load_image(mwo_img)
+			#check image resolution
+			if img.size != (1680, 1050):
+				print("resizing image", mwo_img)
+				#resize if needed, this is done to match the slicing pattern
+				img = self.resize_image(img, new_width=1680)
+
+			#convert to dataframe
+			print("converting to dataframe {} of {}".format(img_list.index(mwo_img), len(img_list)))
+			img_df = self.img_to_dataframe(img, mwo_img, save_df=True)
+			#save
+
+	def img_to_dataframe(self, img, img_name, save_df=False):
+		"""
+		Uses AWS Rekognition to parse images from MWO screenshots
+		Screenshots are split into single element components and resized before sending
+		The resulting text is assembled into a dataframe that matches the MWO scorecard
 		"""
 		match_dict = {
 						"clan":[],
@@ -79,12 +103,15 @@ class mwoImageSlicer(object):
 	            		"damage":[], 
 	            		"ping":[]
 		}
-
+		print("horizontal slicing")
 		h_slices = self.slice_image_horizontal(img)
+
 		for slic in h_slices:
+			print("vertical slicing")
 			player_row_imgs = self.slice_image_vertical(slic)
-			exit()
+			
 			#get OCR for each image in player slice
+			print("OCR runnin on slice {} of {}".format(h_slices.index(slic), len(h_slices)))
 			match_dict["clan"].append(self.get_image_ocr(player_row_imgs[0])["text"])
 			match_dict["name"].append(self.get_image_ocr(player_row_imgs[1])["text"])
 			match_dict["mech"].append(self.get_image_ocr(player_row_imgs[2])["text"])
@@ -94,15 +121,33 @@ class mwoImageSlicer(object):
 			match_dict["assists"].append(self.get_image_ocr(player_row_imgs[6])["text"])
 			match_dict["damage"].append(self.get_image_ocr(player_row_imgs[7])["text"])
 			match_dict["ping"].append(self.get_image_ocr(player_row_imgs[8])["text"])
-		
+			
+		print("converting to dataframe")
 		match_df = pd.DataFrame.from_dict(match_dict)
-		match_df = match_df[["clan", "name", "mech", "status", "score", "kills", "assists", "damage", "ping"]]
+		match_df = match_df[["clan", "name", "mech", "status", "score", "kills", 
+							 "assists", "damage", "ping"]]
+		if save_df:
+			print("saving dataframe")
+			self.save_dataframe(match_df, img_name)
+
 		return match_df
+
+
+	def save_dataframe(self, dataframe, file_name, file_path=None):
+		"""
+		Saves a dataframe to pipe-delimited text format
+		"""
+		if not file_path:
+			file_path = self.data_save
+
+		if not os.path.exists(file_path):
+			os.makedirs(file_path)
+		dataframe.to_csv(file_path+file_name[:-4] + ".txt", sep="|", index=False)
 
 
 	def get_image_ocr(self, img):
 		"""
-		
+		Uses AWS Rekognition to get the text value from an image slice of a MWO screenshot
 		"""
 		img = self.resize_image(img)
 		#convert image to byte array for use with AWS Rekognition API
@@ -128,7 +173,7 @@ class mwoImageSlicer(object):
 		return resp_text
 
 
-	def download_images(self, url, save_folder):
+	def download_images(self, url, download_folder):
 		"""
 			Downloads files from a target site
 
@@ -142,6 +187,7 @@ class mwoImageSlicer(object):
 		#https://steamuserimages-a.akamaihd.net/ugc/949601342893592988/26AACEA63DE6B2EB173C5FABF5766EE390BA31AA/
 		#https://steamcommunity.com/sharedfiles/filedetails/?id=1664039570
 
+
 	def show_image(self, img, folder="../data/images/"):
 		"""
 		Uses the PIL library to display an image
@@ -152,6 +198,7 @@ class mwoImageSlicer(object):
 			img = Image.open(folder+img)
 
 		img.show()
+
 
 	def get_resolution(self, img_file, folder="../data/images/", display=False):
 		"""
@@ -166,8 +213,7 @@ class mwoImageSlicer(object):
 
 	def get_images_in_folder(self, folder="../data/images/"):
 		"""
-			Returns a list of image files in a specified folder
-
+		Returns a list of image files in a specified folder
 		"""
 
 		img_files = [file for file in listdir(folder) if isfile(join(folder, file))]
@@ -178,8 +224,9 @@ class mwoImageSlicer(object):
 
 	def load_image(self, image, folder_path="../data/images/"): #this might be unnecessary
 		"""
-			Stores an image file as a class data object for manipulation
+		Stores an image file as a class data object for manipulation
 		"""
+
 		img = Image.open(folder_path+image)
 		self.current_img = img
 		return img
@@ -224,7 +271,7 @@ class mwoImageSlicer(object):
 			player_images = [] #holds one image slice (horizontal bar) for each of the 24 players
 			for player_area in self.score_1680_1050:
 			    player_images.append(img.crop(player_area))
-			    img.crop(player_area).show()
+			    #img.crop(player_area).show()
 			return player_images
 
 		else:

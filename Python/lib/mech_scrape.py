@@ -19,7 +19,7 @@ class mechScraper(object):
         self.medium_url = "https://wiki.mwomercs.com/index.php?title=Medium_Mechs&action=edit"
         self.heavy_url = "https://wiki.mwomercs.com/index.php?title=Heavy_Mechs&action=edit"
         self.assault_url = "https://wiki.mwomercs.com/index.php?title=Assault_Mechs&action=edit"
-
+        self.output_path = "../output/"
 
     def get_mech_df(self, url=None):
         """
@@ -63,15 +63,18 @@ class mechScraper(object):
         return mech_df
 
             
-    def save_data(self, data, weight_class, path="../../output/"):
+    def save_data(self, data, weight_class, output_path=None):
         """
             Writes a pandas df to disc.
             Uses the weight class as a name for pipe-delimited text file.
         """
-        if not os.path.exists(path):
-            os.makedirs(path)
+        if not output_path:
+            output_path = self.output_path
+        if not os.path.exists(output_path):
+            os.makedirs(output_path)
+        
         print("saving data for " + weight_class)
-        data.to_csv(path + weight_class + ".txt", sep="|", index=False)
+        data.to_csv(output_path + weight_class + ".txt", sep="|", index=False)
 
 
     def main(self):
@@ -89,6 +92,8 @@ class mechScraper(object):
         self.save_data(heavy_mech_df, "heavy")
         self.save_data(medium_mech_df, "medium")
         self.save_data(light_mech_df, "light")
+        self.save_data(pd.concat([assault_mech_df, heavy_mech_df, medium_mech_df, 
+            light_mech_df]), "all_weights")
 
 
 if __name__ =="__main__":

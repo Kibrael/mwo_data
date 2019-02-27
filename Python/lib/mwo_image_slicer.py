@@ -65,12 +65,17 @@ class mwoImageSlicer(object):
 							        	"ping_area":(760, 0, 1680, 1050)
 							         }
 
-	def main(self):
+	def main(self, redo=False):
 		"""
 		"""
 		#get list of images from directory
-		img_list = self.get_images_in_folder()
+		img_list = self.get_files_in_folder()
 		print(len(img_list), "images in folder")
+		if not redo:
+			df_files = self.get_files_in_folder(ext="txt", folder="../output/df_from_img/")
+			df_files = [file[:-4] for file in df_files]
+			img_list = [score for score in img_list if score[:-4] not in df_files]
+			print(len(img_list), "remaining images to process")
 		#loop over images
 		for mwo_img in img_list:
 			#open img with PIL
@@ -121,7 +126,7 @@ class mwoImageSlicer(object):
 			match_dict["assists"].append(self.get_image_ocr(player_row_imgs[6])["text"])
 			match_dict["damage"].append(self.get_image_ocr(player_row_imgs[7])["text"])
 			match_dict["ping"].append(self.get_image_ocr(player_row_imgs[8])["text"])
-			
+
 		print("converting to dataframe")
 		match_df = pd.DataFrame.from_dict(match_dict)
 		match_df = match_df[["clan", "name", "mech", "status", "score", "kills", 
@@ -211,13 +216,13 @@ class mwoImageSlicer(object):
 		return img.size
 
 
-	def get_images_in_folder(self, folder="../data/images/"):
+	def get_files_in_folder(self, ext="jpg", folder="../data/images/"):
 		"""
-		Returns a list of image files in a specified folder
+		Returns a list of files matching a passed extension in a specified folder 
 		"""
 
 		img_files = [file for file in listdir(folder) if isfile(join(folder, file))]
-		img_files = [file for file in img_files if file[-3:]=="jpg"]
+		img_files = [file for file in img_files if file[-3:]==ext]
 		
 		return img_files
 

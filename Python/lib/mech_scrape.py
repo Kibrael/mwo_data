@@ -87,14 +87,35 @@ class mechScraper(object):
         heavy_mech_df = self.get_mech_df(url=self.heavy_url)
         medium_mech_df = self.get_mech_df(url=self.medium_url)
         light_mech_df = self.get_mech_df(url=self.light_url)
+        all_weights_df = pd.concat([assault_mech_df, heavy_mech_df, medium_mech_df, 
+                                    light_mech_df])
 
         self.save_data(assault_mech_df, "assault")
         self.save_data(heavy_mech_df, "heavy")
         self.save_data(medium_mech_df, "medium")
         self.save_data(light_mech_df, "light")
-        self.save_data(pd.concat([assault_mech_df, heavy_mech_df, medium_mech_df, 
-            light_mech_df]), "all_weights")
+        self.save_data(all_weights_df, "all_weights")
+        #get maximum new columns needed for splitting variants
+        max_cols = all_weights_df.variants.apply(lambda x: len(x)).max()
+        melt_cols = []
 
+        for i in range(max_cols):
+            all_weights_df["var_"+str(i)] = ""
+            melt_cols.append("var_"+str(i))
+
+        variant_weights_df = pd.DataFrame()
+        for index, row in all_weights_df.iterrows():
+            for i in range(len(row["variants"])):
+                #add each variant to variant weights as a row with mech, tonnage, variant
+                new_row_dict = {
+                                "mech":row["mechs"],
+                                "tonnage":row["tonnage"],
+                                "variant":row["variants"][i]
+                                }
+                new_row_df = pd.DataFrame(new_row_dict, index=[0])
+                variant_weights_df = pd.concat([variant_weights_df, new_row_df])
+        
+        self.save_data(variant_weights_df, "variant_weights")
 
 if __name__ =="__main__":
     mechScraper().main()

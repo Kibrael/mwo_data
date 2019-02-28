@@ -40,25 +40,72 @@ class mechScraper(object):
 
         mech_obj = re.compile(r'===\s[\w\s-]+[\s()A-Z0-9-]*\s===')
         tonnage_obj = re.compile(r'Tonnage[\']*:[\s\d+]+')
-        chasis_obj = re.compile(r'Var\w\wnts[\']+:[\sa-zA-Z0-9-,]+')
-
+        chassis_obj = re.compile(r'Var\w\wnts[\']+:[\sa-zA-Z0-9-,]+')
+        hero_obj = re.compile(r'[\']+Hero[\']+:[,\s[()\.\'\w-]+')
+        champ_obj = re.compile(r'[\']+Champion[\']+:\s?[+\s[()\w-]+')
+        special_obj = re.compile(r'[\']+Special[\']+:\s?[\/,\s[()\w-]*')
 
         #get matching name, tonnage, and variant list
         mech_results = mech_obj.finditer(page_string)
         tonnage_results = tonnage_obj.finditer(page_string)
-        chasis_results = chasis_obj.finditer(page_string)
-        
-        #clean regex results to get desired text for each mech: name, weight, chasis variants
+        chassis_results = chassis_obj.finditer(page_string)
+        hero_results = hero_obj.finditer(page_string)
+        champion_results = champ_obj.finditer(page_string)
+        special_results = special_obj.finditer(page_string)
+        #print([spec.group() for spec in special_results])
+
+        #clean regex results to get desired text for each mech: name, weight, chassis variants
         mech_names = [mech_name.group().replace("===", "").strip() for mech_name in mech_results]
         mech_weights = [mech_weight.group().replace("\n", "")[-3:].strip() for mech_weight in tonnage_results]
-        chasis_variants = [chasis.group().replace("\n","")[12:].replace(",","").split() for chasis in chasis_results]
+        #chassis variants is a list of lists
+        chassis_variants = [chassis.group().replace("\n","")[12:].replace(",","").split() for chassis in chassis_results]
 
+        hero_variants = [hero.group().replace("\n","")[11:].strip() for hero in hero_results]
+        hero_names = [hero[:hero.find("(")].strip() for hero in hero_variants]
+
+        for i in range(len(hero_variants)):
+            if "(" in hero_variants[i]:
+                #take from open parenthesis to the right
+                hero_variants[i] = hero_variants[i][hero_variants[i].index("("):].replace("'''Special'''","")
+            
+            if "," in hero_variants[i]:
+                hero_variants[i] = hero_variants[i].split(",")
+
+                for j in range(len(hero_variants[i])):
+                    if "(" in hero_variants[i][j]:
+                        hero_variants[i][j] = hero_variants[i][j][hero_variants[i][j].find("(")+1:]
+                        hero_variants[i][j] = hero_variants[i][j].replace(")","")
+            else:
+                hero_variants[i] = [hero_variants[i].replace("'''Special'''","").replace("(","").replace(")","")]
+
+
+        champion_variants = [champ.group() for champ in champion_results]
+        special_variants = [spec.group() for spec in special_results]
+        print(len(special_variants), special_variants)
+        special_variants = [spec[spec.index(":")+1:].strip().replace(" ","") for spec in special_variants]
+        for i in range(len(special_variants)):
+            if "," in special_variants[i]:
+                special_variants[i] = special_variants[i].split(",")
+            else:
+                special_variants[i] = [special_variants[i]]
+        #print(chassis_variants)
+        print("\n\n")
+       
+        print(special_variants)
+        print()
+        #FIXME need to match special varints by first 3 letters to mech name for each mech
+        print(len(mech_names), len(hero_variants), "hero", len(champion_variants), "champ", len(special_variants), "special")
         #convert lists to dict as preprocess for converstion to dataframe
         mech_dict = {
-            "mechs":mech_names,
-            "tonnage":mech_weights,
-            "variants":chasis_variants
-        }
+                        "mechs":mech_names,
+                        "tonnage":mech_weights,
+                        "variants":chassis_variants,
+                        "hero_chassis":hero_variants,
+                        "hero_names":hero_names,
+                        #"champions":champion_variants,
+                        #"specials":special_variants
+                    }
+
         mech_df = pd.DataFrame(mech_dict)
         return mech_df
 
@@ -108,13 +155,21 @@ class mechScraper(object):
             for i in range(len(row["variants"])):
                 #add each variant to variant weights as a row with mech, tonnage, variant
                 new_row_dict = {
-                                "mech":row["mechs"],
+                                "mech_name":row["mechs"],
                                 "tonnage":row["tonnage"],
-                                "variant":row["variants"][i]
+                                "variant":row["variants"][i].upper()
                                 }
                 new_row_df = pd.DataFrame(new_row_dict, index=[0])
                 variant_weights_df = pd.concat([variant_weights_df, new_row_df])
-        
+
+            for i in range(len(row["hero_chassis"])):
+                new_row_dict = {
+                                "mech_name":row["hero_names"],
+                                "tonnage":row["tonnage"],
+                                "variant":row["hero_chassis"][i].upper()
+                }
+                new_row_df = pd.DataFrame(new_row_dict, index=[0])
+                variant_weights_df = pd.concat([variant_weights_df, new_row_df])
         self.save_data(variant_weights_df, "variant_weights")
 
 if __name__ =="__main__":

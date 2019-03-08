@@ -62,8 +62,14 @@ class mechScraper(object):
 
         hero_variants = [hero.group().replace("\n","")[11:].strip() for hero in hero_results]
         hero_names = [hero[:hero.find("(")].strip() for hero in hero_variants]
-
+        hero_names = [hero.replace("'''Special'''","") for hero in hero_names]
+        
         for i in range(len(hero_variants)):
+            #fix Archer Tempest hero typo
+            if "ACR-T" in hero_variants[i]:
+                hero_variants[i] = hero_variants[i].replace("ACR-T", "ARC-T")
+                print(hero_variants[i])
+                print("Archer tempest fixed \n\n")
             if "(" in hero_variants[i]:
                 #take from open parenthesis to the right
                 hero_variants[i] = hero_variants[i][hero_variants[i].index("("):].replace("'''Special'''","")
@@ -74,27 +80,36 @@ class mechScraper(object):
                 for j in range(len(hero_variants[i])):
                     if "(" in hero_variants[i][j]:
                         hero_variants[i][j] = hero_variants[i][j][hero_variants[i][j].find("(")+1:]
-                        hero_variants[i][j] = hero_variants[i][j].replace(")","")
+                        hero_variants[i][j] = hero_variants[i][j].replace(")","")                            
             else:
                 hero_variants[i] = [hero_variants[i].replace("'''Special'''","").replace("(","").replace(")","")]
-
+            
+            
 
         champion_variants = [champ.group() for champ in champion_results]
+        
+        #process scrape data for special variants to remove clutter
         special_variants = [spec.group() for spec in special_results]
-        print(len(special_variants), special_variants)
+        
         special_variants = [spec[spec.index(":")+1:].strip().replace(" ","") for spec in special_variants]
+        special_list = [] #use list to hold all special variants as there are fewer than number of chassis
         for i in range(len(special_variants)):
             if "," in special_variants[i]:
                 special_variants[i] = special_variants[i].split(",")
             else:
                 special_variants[i] = [special_variants[i]]
-        #print(chassis_variants)
-        print("\n\n")
+            #convert special variants to single list
+            for j in range(len(special_variants[i])):
+                special_list.append(special_variants[i][j])
        
-        print(special_variants)
+        for i in range(len(special_list)):
+            if special_list[i] == "ACR-2R(S)":
+                print("Archer special fixed")
+                special_list[i] = "ARC-2R(S)"
         print()
+        
         #FIXME need to match special varints by first 3 letters to mech name for each mech
-        print(len(mech_names), len(hero_variants), "hero", len(champion_variants), "champ", len(special_variants), "special")
+        #print(len(mech_names), len(hero_variants), "hero", len(champion_variants), "champ", len(special_variants), "special")
         #convert lists to dict as preprocess for converstion to dataframe
         mech_dict = {
                         "mechs":mech_names,
@@ -102,11 +117,36 @@ class mechScraper(object):
                         "variants":chassis_variants,
                         "hero_chassis":hero_variants,
                         "hero_names":hero_names,
-                        #"champions":champion_variants,
-                        #"specials":special_variants
+                        #"champions":champion_variants
                     }
 
         mech_df = pd.DataFrame(mech_dict)
+        
+        #match special variants to base chassis to get weight data
+        mech_df["special_variants"] = ""
+        for index, row in mech_df.iterrows():
+            
+            add_specials = []
+            for i in range(len(special_list)):
+
+                #check for clan IIC model
+                if "IIC" in row["variants"][0]:
+                    clan = True
+                else:
+                    clan = False
+
+                mech_letters = row["variants"][0][:3].upper()
+                if clan:
+                    if mech_letters == special_list[i][:3].upper() and "IIC" in special_list[i]:
+                        add_specials.append(special_list[i])
+                else:
+                    if mech_letters == special_list[i][:3].upper() and "IIC" not in special_list[i]:
+                        add_specials.append(special_list[i])
+
+            mech_df.at[index, "special_variants"] = add_specials
+        mech_df = mech_df[["mechs", "tonnage","hero_names", "hero_chassis", "variants",
+                           "special_variants"]]
+        print(mech_df)
         return mech_df
 
             
@@ -167,9 +207,23 @@ class mechScraper(object):
                                 "mech_name":row["hero_names"],
                                 "tonnage":row["tonnage"],
                                 "variant":row["hero_chassis"][i].upper()
-                }
+                                }
                 new_row_df = pd.DataFrame(new_row_dict, index=[0])
                 variant_weights_df = pd.concat([variant_weights_df, new_row_df])
+
+
+            for i in range(len(row["special_variants"])):
+                #print(row["special_variants"][i])
+                new_row_dict = {
+                                "mech_name":row["mechs"],
+                                "tonnage":row["tonnage"],
+                                "variant":row["special_variants"][i].upper()
+                                }
+                new_row_df = pd.DataFrame(new_row_dict, index=[0])
+                variant_weights_df = pd.concat([variant_weights_df, new_row_df])  
+
+        #remove duplicate rows 
+
         self.save_data(variant_weights_df, "variant_weights")
 
 if __name__ =="__main__":

@@ -269,7 +269,8 @@ class mechScraper(object):
                                 "tonnage":row["tonnage"],
                                 "variant":row["champion_variants"][i].upper()
                                 }
-
+                new_row_df = pd.DataFrame(new_row_dict, index=[0])
+                variant_weights_df = pd.concat([variant_weights_df, new_row_df])
         #remove duplicate rows 
         variant_weights_df = variant_weights_df[variant_weights_df.duplicated(keep="first")==False]
         self.save_data(variant_weights_df, "variant_weights")

@@ -240,6 +240,8 @@ class mwoImageSlicer(object):
 	def resize_image(self, img, new_width=300, print_size=False):
 		"""
 			Resizes an image while maintaining aspect ratio
+			new_width is the new width of the image in pixels
+			height will be set based on the aspect ratio and the passed width parameter
 		"""
 
 		width_pct = (new_width / float(img.size[0])) #get new width as a percent of old width for aspect ratio 

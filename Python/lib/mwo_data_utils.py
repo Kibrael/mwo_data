@@ -38,7 +38,18 @@ class mwo_data_engine(object):
 		"KGC-O00B":"KGC-000B",
 		"UM- -R68(L)":"UM-R68(L)",
 		"CTF-3 F-3D(C)":"CTF-3D(C)",
-		"STK-3F(C) STK-3":"STK-3F(C)"
+		"STK-3F(C) STK-3":"STK-3F(C)",
+		"KGC-000(L) KGC-O": "KGC-000(L)",
+		"DWF-PRIMI":"DWF-PRIME",
+		"CRB- RB-27(R)":"CRB-27(R)",
+		"ACW-PRIMI":"ACW-PRIME",
+		"ACH-PRIME H-PRIME":"ACH-PRIME",
+		"MAD-I1C-A":"MAD-IIC-A",
+		"KFX- FX-G(L)":"KFX-G(L)",
+		"MAL-1R(R) MAL-":"MAL-1R(R)",
+		"HMN-PRIM":"HMN-PRIME",
+		"TNS- NS-4S(S)":"TNS-4S(S)"
+
 		}
 
 		#test with pandas map to column
@@ -56,6 +67,7 @@ class mwo_data_engine(object):
 		
 		return scores_df
 
+
 	def clean_20171118200711_1(self):
 		"""
 		Cleans the image 20171118200711_1.txt
@@ -63,33 +75,69 @@ class mwo_data_engine(object):
 		"""
 		bad_df = pd.read_csv(self.score_df_path+"20171118200711_1.txt", sep="|")
 		bad_df = self.clean_mech_variants(bad_df)
-		#change -PRIME to TBR-PRIME
-		bad_df.at[18, "mech"] = "TBR-PRIME"
-		#change row 0 kills to 4
-		bad_df.at[0, "kills"] = 4
-		#change row 1 kills to 2
-		bad_df.at[1, "kills"] = 2
-		#change row 3 kills to 2
-
+		bad_df.at[18, "mech"] = "TBR-PRIME" #change -PRIME to TBR-PRIME
+		bad_df.at[0, "kills"] = 4 #change row 0 kills to 4
+		bad_df.at[1, "kills"] = 2 #change row 1 kills to 2
+		bad_df.at[3, "kills"] = 2 #change row 3 kills to 2
 		#fill NAN with 0
 		bad_df.fillna(0, inplace=True)
 		bad_df.to_csv(self.clean_df_path+"20171118200711_1.csv", index=False, sep="|")
+
 
 	def clean_20171118202707_1(self):
 		"""
 		"""
 		bad_df = pd.read_csv(self.score_df_path+"20171118202707_1.txt", sep = "|")
-		print(bad_df)
 		bad_df = self.clean_mech_variants(bad_df)
-		#change row 0 assists to 1
-		bad_df.at[0, "assists"] = 1
-		#change row 2 assists to 1
-		bad_df.at[2, "assists"] = 1
-		#change row 3 kills to 1
-		bad_df.at[3, "kills"] = 1
-		#change row 22 kills to 1
+		bad_df.at[3, "kills"] = 1 #change row 3 kills to 1
+		bad_df.at[22, "kills"] = 1 #change row 22 kills to 1
+		bad_df.at[23, "kills"] = 1 #change row 23 kills to 1
+		bad_df.at[0, "assists"] = 1 #change row 0 assists to 1
+		bad_df.at[2, "assists"] = 1 #change row 2 assists to 1
+		bad_df.at[4, "assists"] = 1 #change row 4 assists to 1
+		bad_df.at[5, "assists"] = 1 #change row 5 assists to 1
+		bad_df.at[6, "assists"] = 1 #change row 6 assists to 1
+		bad_df.at[10, "assists"] = 1 #change row 10 assists to 1
+		bad_df.at[11, "assists"] = 1 #change row 11 assists to 1
+		bad_df.at[16, "assists"] = 1 #change row 16 assists to 1
+		bad_df.at[18, "assists"] = 1 #change row 18 assists to 1
+		bad_df.at[15, "mech"] = "TNS-5P" #set row 15 TNS-5 to TNS 5P
+		bad_df.at[2, "mech"] = "BJ-1DC" #set row 2 to BJ-1DC
+		return bad_df
+
+	def clean_20171118203637_1(self):
+		"""
+		"""
+
+		bad_df = pd.read_csv(self.score_df_path+"20171118203637_1.txt", sep="|")
+		bad_df = self.clean_mech_variants(bad_df)
+		bad_df.at[22, "mech"] = "TNS-5S" #set row 22 mech to TNS-5S
+		bad_df.at[1, "kills"] = 1 #set row 1 kills to 1
+		bad_df.at[3, "kills"] = 1 #set row 4 kills to 1
+		bad_df.at[3, "assists"] = 5 #set row 4 assists to 5
+		bad_df.at[4, "assists"] = 1
+		bad_df.at[15, "assists"] = 1 
+		return bad_df
+
+	def clean_20171118204451_1(self):
+		"""
+		"""
+		bad_df = pd.read_csv(self.score_df_path+"20171118204451_1.txt", sep="|")
+		bad_df = self.clean_mech_variants(bad_df)
 		bad_df.at[22, "kills"] = 1
-		#change row 23 kills to 1
-		bad_df.at[23, "kills"] = 1
-		print(bad_df)
+		bad_df.at[8, "assists"] = 4
+		bad_df.at[10, "assists"] = 4
+		bad_df.at[11, "assists"] = 1
+		bad_df.at[12, "assists"] = 1
+		bad_df.at[13, "assists"] = 1
+		bad_df.at[14, "assists"] = 1
+		bad_df.at[17, "assists"] = 1
+		bad_df.at[18, "assists"] = 1
+		bad_df.at[19, "assists"] = 1		
+		bad_df.at[20, "assists"] = 1
+		bad_df.at[21, "assists"] = 1
+		bad_df.at[23, "assists"] = 1	
+		bad_df.at[8, "mech"] = "NVA-PRIME"
+		bad_df.at[10, "mech"] = "NVA-PRIME"	
+
 		return bad_df

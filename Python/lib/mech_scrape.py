@@ -68,7 +68,6 @@ class mechScraper(object):
         hero_names = [hero[:hero.find("(")].strip() for hero in hero_variants]
         #correct for missing single quote in web data
         hero_names = [hero.replace("'''Special''","") for hero in hero_names]
-        
 
         for i in range(len(hero_variants)):
             #fix Archer Tempest hero typo
@@ -88,7 +87,6 @@ class mechScraper(object):
                         hero_variants[i][j] = hero_variants[i][j].replace(")","")                            
             else:
                 hero_variants[i] = [hero_variants[i].replace("'''Special'''","").replace("(","").replace(")","")]
-            
             
         #process scrape data for champion variants
         #convert to list from regex object
@@ -123,9 +121,21 @@ class mechScraper(object):
                 special_list[i] = "SMNM-F(L)"
                 special_list.append("SMN-M(L)")
                 print("Fixing SMNM-F(L) and SMNM-F(L)")
+
         for i in range(len(hero_names)):
             if hero_names[i] == "Wrat":
                 hero_names[i] = "Wrath"
+                print(hero_names[i])
+            if hero_names[i] == "Hi Ther":
+                hero_names[i] = "Hi There"
+
+        for i in range(len(hero_variants)):
+            if hero_variants[i][0] == "HMN-PK":
+                hero_variants[i][0] = "HMN-PA"
+                print("Fixing HMN-PK: ", hero_variants[i])
+            if hero_variants[i][0] == "EBJ-ESP":
+                hero_variants[i][0] = "EBJ-EC"
+
         print()
 
         #FIXME: fafnir wrath is missing h in hero name

@@ -135,6 +135,8 @@ class mechScraper(object):
                 print("Fixing HMN-PK: ", hero_variants[i])
             if hero_variants[i][0] == "EBJ-ESP":
                 hero_variants[i][0] = "EBJ-EC"
+            if hero_variants[i][0] == "MKII-DS":
+                hero_variants[i][0] = "MCII-DS"
 
         print()
 

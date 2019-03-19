@@ -48,8 +48,8 @@ class mwo_data_engine(object):
 		"KFX- FX-G(L)":"KFX-G(L)",
 		"MAL-1R(R) MAL-":"MAL-1R(R)",
 		"HMN-PRIM":"HMN-PRIME",
-		"TNS- NS-4S(S)":"TNS-4S(S)"
-
+		"TNS- NS-4S(S)":"TNS-4S(S)",
+		"VA-PRIME":"NVA-PRIME"
 		}
 
 		#test with pandas map to column
@@ -137,7 +137,6 @@ class mwo_data_engine(object):
 		bad_df.at[20, "assists"] = 1
 		bad_df.at[21, "assists"] = 1
 		bad_df.at[23, "assists"] = 1	
-		bad_df.at[8, "mech"] = "NVA-PRIME"
 		bad_df.at[10, "mech"] = "NVA-PRIME"	
-
+		bad_df.at[8, "mech"] = "NVA-PRIME"
 		return bad_df

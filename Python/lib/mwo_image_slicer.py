@@ -24,30 +24,30 @@ class mwoImageSlicer(object):
 		self.data_save = "../output/df_from_img/"
 
 		#horizontal slicing dimensions
-		self.score_1680_1050 = [(570, 205, 1380, 230),
-                                (570, 230, 1380, 255),
-                                (570, 253, 1380, 280),
-                                (570, 275, 1380, 300),
-                                (570, 303, 1380, 325),
-                                (570, 328, 1380, 350),
-                                (570, 350, 1380, 372),
-                                (570, 373, 1380, 395),
-                                (570, 403, 1380, 422),
-                                (570, 425, 1380, 450),
-                                (570, 448, 1380, 470),
-                                (570, 470, 1380, 490),
-                                (570, 505, 1380, 522),
-                                (570, 525, 1380, 549),
-                                (570, 550, 1380, 572),
-                                (570, 570, 1380, 595),
-                                (570, 600, 1380, 620),
-                                (570, 623, 1380, 645),
-                                (570, 645, 1380, 665),
-                                (570, 667, 1380, 689),
-                                (570, 698, 1380, 715),
-                                (570, 720, 1380, 738),
-                                (570, 742, 1380, 762),
-                                (570, 762, 1380, 785)]
+		self.score_1680_1050 = [(565, 205, 1380, 230),
+                                (565, 230, 1380, 255),
+                                (565, 253, 1380, 280),
+                                (565, 275, 1380, 300),
+                                (565, 303, 1380, 325),
+                                (565, 328, 1380, 350),
+                                (565, 350, 1380, 372),
+                                (565, 373, 1380, 395),
+                                (565, 403, 1380, 425),
+                                (565, 425, 1380, 450),
+                                (565, 448, 1380, 470),
+                                (565, 468, 1380, 492),
+                                (565, 503, 1380, 525),
+                                (565, 525, 1380, 549),
+                                (565, 548, 1380, 572),
+                                (565, 570, 1380, 595),
+                                (565, 600, 1380, 620),
+                                (565, 623, 1380, 645),
+                                (565, 645, 1380, 665),
+                                (565, 667, 1380, 689),
+                                (565, 696, 1380, 719),
+                                (565, 718, 1380, 740),
+                                (565, 742, 1380, 762),
+                                (565, 762, 1380, 789)]
 
         #Vertical slicing dimensions
         #these are the vertical coordinates for 1680 by 1050 resolution
@@ -56,7 +56,7 @@ class mwoImageSlicer(object):
 		self.score_parts_1680_1050 = {
 							        	"clan_area":(0, 0, 915, 1050),
 							        	"name_area":(50, 0, 1130, 1050),
-							        	"mech_area":(265, 0, 1215, 1050),
+							        	"mech_area":(265, 0, 1220, 1050),
 							        	"status_area":(390, 0, 1330, 1050),
 							        	"score_area":(500, 0, 1430, 1050),
 							        	"kills_area":(590, 0, 1505, 1050),
@@ -91,7 +91,7 @@ class mwoImageSlicer(object):
 			img_df = self.img_to_dataframe(img, mwo_img, save_df=True)
 			#save
 
-	def img_to_dataframe(self, img, img_name, save_df=False):
+	def img_to_dataframe(self, img, img_name, save_img=False, save_df=False):
 		"""
 		Uses AWS Rekognition to parse images from MWO screenshots
 		Screenshots are split into single element components and resized before sending
@@ -111,12 +111,16 @@ class mwoImageSlicer(object):
 		print("horizontal slicing")
 		h_slices = self.slice_image_horizontal(img)
 
-		for slic in h_slices:
+		for i in range(len(h_slices)):
 			print("vertical slicing")
-			player_row_imgs = self.slice_image_vertical(slic)
+			player_row_imgs = self.slice_image_vertical(h_slices[i])
+			
+			if save_img:
+				for j in range(len(player_row_imgs)):
+					player_row_imgs[j].save("../data/test_data/"+"player_img"+str(j)+"_"+str(i)+".jpg")
 			
 			#get OCR for each image in player slice
-			print("OCR runnin on slice {} of {}".format(h_slices.index(slic), len(h_slices)))
+			print("OCR runnin on slice {} of {}".format(i, len(h_slices)))
 			match_dict["clan"].append(self.get_image_ocr(player_row_imgs[0])["text"])
 			match_dict["name"].append(self.get_image_ocr(player_row_imgs[1])["text"])
 			match_dict["mech"].append(self.get_image_ocr(player_row_imgs[2])["text"])
@@ -318,13 +322,13 @@ class mwoImageSlicer(object):
 			w, h = img.size #get size of passed image, these are the horizontal slices of player data
 			#image cropping uses relative mapping
 			#get clan    x_start, y_start, x_end,   y_end
-			clan_area = (0, 0, w-760, h)
+			clan_area = (3, 0, w-760, h)
 			image_slices.append(img.crop(clan_area))
 			#get player name
 			name_area = (50, 0, w-550, h)
 			image_slices.append(img.crop(name_area))
 			#get mech
-			mech_area = (265, 0, w-465, h)
+			mech_area = (265, 0, w-445, h)
 			image_slices.append(img.crop(mech_area))
 			#get status
 			status_area = (390, 0, w-350, h)

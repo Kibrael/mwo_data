@@ -5,6 +5,7 @@ Awesome (AWS)|80|AWS-8T
 Awesome (AWS)|80|AWS-8V
 Awesome (AWS)|80|AWS-9M
 Pretty Baby|80|AWS-PB
+Awesome (AWS)|80|AWS-9M(C)
 Charger (CGR)|80|CGR-1A1
 Charger (CGR)|80|CGR-1A5
 Charger (CGR)|80|CGR-3K
@@ -19,7 +20,7 @@ Victor (VTR)|80|VTR-9K
 Victor (VTR)|80|VTR-9S
 Dragon Slayer|80|VTR-DS
 Victor (VTR)|80|VTR-9A1(L)
-Victor (VTR)|80|VTR-9A1(L)
+Victor (VTR)|80|VTR-9S(C)
 Zeus (ZEU)|80|ZEU-5S
 Zeus (ZEU)|80|ZEU-6S
 Zeus (ZEU)|80|ZEU-6T
@@ -29,6 +30,7 @@ Skokomish|80|ZEU-SKO
 Zeus (ZEU)|80|ZEU-6S(R)
 Zeus (ZEU)|80|ZEU-6T(S)
 Zeus (ZEU)|80|ZEU-9S2(L)
+Zeus (ZEU)|80|ZEU-6T(C)
 Battlemaster (BLR)|85|BLR-1D
 Battlemaster (BLR)|85|BLR-1G
 Battlemaster (BLR)|85|BLR-1S
@@ -37,6 +39,7 @@ Battlemaster (BLR)|85|BLR-3M
 Battlemaster (BLR)|85|BLR-3S
 Hellslinger|85|BLR-HS
 Battlemaster (BLR)|85|BLR-1G(P)
+Battlemaster (BLR)|85|BLR-2C(C)
 Stalker (STK)|85|STK-3F
 Stalker (STK)|85|STK-3FB
 Stalker (STK)|85|STK-3H
@@ -45,6 +48,7 @@ Stalker (STK)|85|STK-5M
 Stalker (STK)|85|STK-5S
 Misry|85|STK-M
 Stalker (STK)|85|STK-3FB(L)
+Stalker (STK)|85|STK-3F(C)
 Cyclops (CP)|90|CP-10-Q
 Cyclops (CP)|90|CP-10-Z
 Cyclops (CP)|90|CP-11-A
@@ -58,17 +62,20 @@ Highlander (HGN)|90|HGN-733
 Highlander (HGN)|90|HGN-733C
 Highlander (HGN)|90|HGN-733P
 Heavy Metal|90|HGN-HM
+Highlander (HGN)|90|HGN-733C(C)
 Mauler (MAL)|90|MAL-1P
 Mauler (MAL)|90|MAL-1R
 Mauler (MAL)|90|MAL-2P
 Mauler (MAL)|90|MAL-MX90
 Knockout|90|MAL-KO
 Mauler (MAL)|90|MAL-1R(R)
+Mauler (MAL)|90|MAL-MX90(C)
 Banshee (BNC)|95|BNC-3E
 Banshee (BNC)|95|BNC-3M
 Banshee (BNC)|95|BNC-3S
 La Malinche|95|BNC-LM
 La Malinche|95|BNC-SR
+Banshee (BNC)|95|BNC-3M(C)
 Nightstar (NSR)|95|NSR-10P
 Nightstar (NSR)|95|NSR-9FC
 Nightstar (NSR)|95|NSR-9J
@@ -76,6 +83,7 @@ Nightstar (NSR)|95|NSR-9P
 Nightstar (NSR)|95|NSR-9S
 Wolf Phoenix|95|NSR-WP
 Nightstar (NSR)|95|NSR-9J(S)
+Nightstar (NSR)|95|NSR-9P(C)
 Annihilator (ANH)|100|ANH-1A
 Annihilator (ANH)|100|ANH-1E
 Annihilator (ANH)|100|ANH-1P
@@ -92,12 +100,13 @@ Boar's Head|100|AS7-BH
 Boar's Head|100|AS7-KR
 Atlas (AS7)|100|AS7-D(F)
 Atlas (AS7)|100|AS7-S(L)
+Atlas (AS7)|100|AS7-RS(C)
 Fafnir (FNR)|100|FNR-5
 Fafnir (FNR)|100|FNR-5B
 Fafnir (FNR)|100|FNR-5E
 Fafnir (FNR)|100|FNR-6R
 Fafnir (FNR)|100|FNR-6U
-Wrat|100|WRATH
+Wrath|100|WRATH
 King Crab (KGC)|100|KGC-000
 King Crab (KGC)|100|KGC-0000
 King Crab (KGC)|100|KGC-000B
@@ -134,6 +143,7 @@ Nanuq|90|WHK-NQ
 Warhawk (WHK)|90|WHK-PRIME(G)
 Warhawk (WHK)|90|WHK-PRIME(I)
 Warhawk (WHK)|90|WHK-C(S)
+Warhawk (WHK)|90|WHK-C(C)
 Blood Asp (BAS)|90|BAS-PRIME
 Blood Asp (BAS)|90|BAS-A
 Blood Asp (BAS)|90|BAS-B
@@ -151,7 +161,7 @@ Mad Cat Mk II (MCII)|90|MCII-2
 Mad Cat Mk II (MCII)|90|MCII-4
 Mad Cat Mk II (MCII)|90|MCII-A
 Mad Cat Mk II (MCII)|90|MCII-B
-Deathstrike|90|MKII-DS
+Deathstrike|90|MCII-DS
 Mad Cat Mk II (MCII)|90|MCII-1(S)
 Supernova (SNV)|90|SNV-1
 Supernova (SNV)|90|SNV-3
@@ -178,6 +188,7 @@ Ultraviolet|100|DWF-UV
 Dire Wolf (DWF)|100|DWF-PRIME(G)
 Dire Wolf (DWF)|100|DWF-PRIME(I)
 Dire Wolf (DWF)|100|DWF-W(S)
+Dire Wolf (DWF)|100|DWF-W(C)
 Kodiak (KDK)|100|KDK-1
 Kodiak (KDK)|100|KDK-2
 Kodiak (KDK)|100|KDK-3
@@ -185,6 +196,8 @@ Kodiak (KDK)|100|KDK-4
 Kodiak (KDK)|100|KDK-5
 Spirit Bear|100|KDK-SB
 Kodiak (KDK)|100|KDK-1(S)
+Kodiak (KDK)|100|AS7-D(F)
+Kodiak (KDK)|100|KDK-3(C)
 Champion (CHP)|60|CHP-1N
 Champion (CHP)|60|CHP-2N
 Champion (CHP)|60|CHP-3N
@@ -197,10 +210,12 @@ Dragon (DRG)|60|DRG-1N
 Dragon (DRG)|60|DRG-5N
 Flame|60|DRG-FLAME
 Flame|60|DRG-FANG
+Dragon (DRG)|60|DRG-5N(C)
 Quickdraw (QKD)|60|QKD-4G
 Quickdraw (QKD)|60|QKD-4H
 Quickdraw (QKD)|60|QKD-5K
 IV-Four|60|QKD-IV4
+Quickdraw (QKD)|60|QKD-4G(C)
 Rifleman (RFL)|60|RFL-3C
 Rifleman (RFL)|60|RFL-3N
 Rifleman (RFL)|60|RLF-5D
@@ -214,10 +229,12 @@ Catapult (CPLT)|65|CPLT-K2
 Jester|65|CPLT-J
 Jester|65|CPLT-BB
 Catapult (CPLT)|65|CPLT-C1(F)
+Catapult (CPLT)|65|CPLT-A1(C)
 Jagermech (JM6)|65|JM6-A
 Jagermech (JM6)|65|JM6-DD
 Jagermech (JM6)|65|JM6-S
 Firebrand|65|JM6-FB
+Jagermech (JM6)|65|JM6-A(C)
 Roughneck (RGH)|65|RGH-1A
 Roughneck (RGH)|65|RGH-1B
 Roughneck (RGH)|65|RGH-1C
@@ -226,6 +243,7 @@ Roughneck (RGH)|65|RGH-3A
 Reaver|65|RGH-R
 Reaver|65|RGH-PH
 Roughneck (RGH)|65|RGH-1A(S)
+Roughneck (RGH)|65|RGH-1A(C)
 Thunderbolt (TDR)|65|TDR-5S
 Thunderbolt (TDR)|65|TDR-5SS
 Thunderbolt (TDR)|65|TDR-9S
@@ -233,6 +251,7 @@ Thunderbolt (TDR)|65|TDR-9SE
 Top Dog|65|TDR-TD 
 Thunderbolt (TDR)|65|TDR-5S(P)
 Thunderbolt (TDR)|65|TDR-9SE(S)
+Thunderbolt (TDR)|65|TDR-9SE(C)
 Archer (ARC)|70|ARC-2R
 Archer (ARC)|70|ARC-5S
 Archer (ARC)|70|ARC-5W
@@ -246,6 +265,7 @@ Cataphract (CTF)|70|CTF-3L
 Cataphract (CTF)|70|CTF-4X
 Ilya Muromets|70|CTF-IM
 Cataphract (CTF)|70|CTF-3L(L)
+Cataphract (CTF)|70|CTF-3D(C)
 Grasshopper (GHR)|70|GHR-5H
 Grasshopper (GHR)|70|GHR-5J
 Grasshopper (GHR)|70|GHR-5N
@@ -253,11 +273,13 @@ Grasshopper (GHR)|70|GHR-5P
 Mjölnir|70|GHR-MJ
 Grasshopper (GHR)|70|GHR-5H(S)
 Grasshopper (GHR)|70|GHR-5J(R)
+Grasshopper (GHR)|70|GHR-5H(C)
 Warhammer (WHM)|70|WHM-6D
 Warhammer (WHM)|70|WHM-6R
 Warhammer (WHM)|70|WHM-7S
 Black Widow|70|WHM-BW
 Warhammer (WHM)|70|WHM-6R(S)
+Warhammer (WHM)|70|WHM-6D(C)
 Black Knight (BL)|75|BL-6-KNT
 Black Knight (BL)|75|BL-6B-KNT
 Black Knight (BL)|75|BL-7-KNT
@@ -267,13 +289,14 @@ Black Knight (BL)|75|BL-6-KNT(R)
 Marauder (MAD)|75|MAD-3R
 Marauder (MAD)|75|MAD-5D
 Marauder (MAD)|75|MAD-5M
-Bounty Hunter II'''Special''|75|BOUNTY HUNTER II
+Bounty Hunter II|75|BOUNTY HUNTER II
 Marauder (MAD)|75|MAD-3R(S)
 Orion (ON1)|75|ON1-K
 Orion (ON1)|75|ON1-M
 Orion (ON1)|75|ON1-V
 Orion (ON1)|75|ON1-VA
 Protector|75|ON1-P
+Orion (ON1)|75|ON1-K(C)
 Thanatos (TNS)|75|TNS-4P
 Thanatos (TNS)|75|TNS-4S
 Thanatos (TNS)|75|TNS-5P
@@ -289,6 +312,7 @@ Mad Dog (MDD)|60|MDD-H
 Bandit|60|MDD-BD
 Bandit|60|MDD-RV
 Mad Dog (MDD)|60|MDD-PRIME(I)
+Mad Dog (MDD)|60|MDD-C(C)
 Hellfire|60|HLF-1
 Hellfire|60|HLF-2
 Hellfire|60|HLF-A
@@ -301,9 +325,10 @@ Ebon Jaguar (EBJ)|65|EBJ-A
 Ebon Jaguar (EBJ)|65|EBJ-B
 Ebon Jaguar (EBJ)|65|EBJ-C
 Ebon Jaguar (EBJ)|65|EBJ-D
-Esprit De Corps|65|EBJ-ESP
+Esprit De Corps|65|EBJ-EC
 Ebon Jaguar (EBJ)|65|EBJ-PRIME(I)
 Ebon Jaguar (EBJ)|65|EBJ-PRIME(S)
+Ebon Jaguar (EBJ)|65|EBJ-PRIME(C)
 Hellbringer (HBR)|65|HBR-A
 Hellbringer (HBR)|65|HBR-B
 Hellbringer (HBR)|65|HBR-F
@@ -312,6 +337,7 @@ Hellbringer (HBR)|65|HBR-PRIME
 Virago|65|HBR-VI
 Hellbringer (HBR)|65|HBR-PRIME(I)
 Hellbringer (HBR)|65|HBR-F(L)
+Hellbringer (HBR)|65|HBR-F(C)
 Linebacker (LBK)|65|LBK-PRIME
 Linebacker (LBK)|65|LBK-A
 Linebacker (LBK)|65|LBK-B
@@ -337,7 +363,8 @@ Summoner (SMN)|70|SMN-M
 Pride|70|SMN-PD
 Summoner (SMN)|70|SMN-PRIME(G)
 Summoner (SMN)|70|SMN-PRIME(I)
-Summoner (SMN)|70|SMNM-F(L)SMN-M(L)
+Summoner (SMN)|70|SMNM-F(L)
+Summoner (SMN)|70|SMN-M(L)
 Sun Spider (SNS)|70|SNS-A
 Sun Spider (SNS)|70|SNS-B
 Sun Spider (SNS)|70|SNS-C
@@ -367,6 +394,8 @@ Timber Wolf (TBR)|75|TBR-S
 Warrant|75|TBR-WAR
 Timber Wolf (TBR)|75|TBR-PRIME(G)
 Timber Wolf (TBR)|75|TBR-PRIME(I)
+Timber Wolf (TBR)|75|TNS-4S(S)
+Timber Wolf (TBR)|75|TBR-C(C)
 Assassin (ASN)|40|ASN-21
 Assassin (ASN)|40|ASN-23
 Assassin (ASN)|40|ASN-26
@@ -374,6 +403,7 @@ Assassin (ASN)|40|ASN-27
 Assassin (ASN)|40|ASN-101
 Darkdeath|40|ASN-DD
 Assassin (ASN)|40|ASN-21(S)
+Assassin (ASN)|40|ASN-101(C)
 Cicada (CDA)|40|CDA-2A
 Cicada (CDA)|40|CDA-2B
 Cicada (CDA)|40|CDA-3C
@@ -381,6 +411,7 @@ Cicada (CDA)|40|CDA-3F
 Cicada (CDA)|40|CDA-3M
 X-5|40|CDA-X5
 Cicada (CDA)|40|CDA-3F(L)
+Cicada (CDA)|40|CDA-2A(C)
 Vulcan (VL)|40|VL-2T
 Vulcan (VL)|40|VL-5M
 Vulcan (VL)|40|VL-5S
@@ -395,6 +426,7 @@ Blackjack (BJ)|45|BJ-2
 Blackjack (BJ)|45|BJ-3
 Arrow|45|BJ-A
 Blackjack (BJ)|45|BJ-2(L)
+Blackjack (BJ)|45|BJ-1(C)
 Hellspawn (HSN)|45|HSN-7D
 Hellspawn (HSN)|45|HSN-7P
 Hellspawn (HSN)|45|HSN-8E
@@ -410,10 +442,12 @@ Phoenix Hawk (PXH)|45|PXH-3S
 Kuroi Kiri|45|PXH-KK
 Kuroi Kiri|45|PXH-R
 Phoenix Hawk (PXH)|45|PXH-1(S)
+Phoenix Hawk (PXH)|45|PXH-2(C)
 Vindicator (VND)|45|VND-1AA
 Vindicator (VND)|45|VND-1R
 Vindicator (VND)|45|VND-1X
 St. Ives' Blues|45|VND-SIB
+Vindicator (VND)|45|VND-1AA(C)
 Centurion (CN9)|50|CN9-A
 Centurion (CN9)|50|CN9-AH
 Centurion (CN9)|50|CN9-AL
@@ -421,6 +455,7 @@ Centurion (CN9)|50|CH9-D
 Yen-Lo-Wang|50|CN9-YLW
 Centurion (CN9)|50|CN9-A(NCIX)
 Centurion (CN9)|50|CN9-AH(L)
+Centurion (CN9)|50|CN9-A(C)
 Crab (CRB)|50|CRB-20
 Crab (CRB)|50|CRB-27
 Crab (CRB)|50|CRB-27B
@@ -428,12 +463,14 @@ Crab (CRB)|50|CRB-27SL
 Florentine|50|CRB-FL
 Crab (CRB)|50|CRB-27(R)
 Crab (CRB)|50|CRB-27B(S)
+Crab (CRB)|50|CRB-27B(C)
 Enforcer (ENF)|50|ENF-4P
 Enforcer (ENF)|50|ENF-4R
 Enforcer (ENF)|50|ENF-5D
 Enforcer (ENF)|50|ENF-5P
 Ghillie|50|ENF-GH
 Enforcer (ENF)|50|ENF-5D(R)
+Enforcer (ENF)|50|ENF-4R(C)
 Hunchback (HBK)|50|HBK-4G
 Hunchback (HBK)|50|HBK-4H
 Hunchback (HBK)|50|HBK-4J
@@ -443,12 +480,14 @@ Grid Iron|50|HBK-GI
 Hunchback (HBK)|50|HBK-4G(F)
 Hunchback (HBK)|50|HBK-4P(S)
 Hunchback (HBK)|50|HBK-GI(LTD)
+Hunchback (HBK)|50|HBK-4P(C)
 Trebuchet (TBT)|50|TBT-3C
 Trebuchet (TBT)|50|TBT-5J
 Trebuchet (TBT)|50|TBT-5N
 Trebuchet (TBT)|50|TBT-7K
 Trebuchet (TBT)|50|TBT-7M
 Loup de Guerre|50|TBT-LDG
+Trebuchet (TBT)|50|TBT-7M(C)
 Uziel (UZL)|50|UZL-2S
 Uziel (UZL)|50|UZL-3P
 Uziel (UZL)|50|UZL-3S
@@ -456,6 +495,7 @@ Uziel (UZL)|50|UZL-5P
 Uziel (UZL)|50|UZL-6P
 Belial|50|UZL-BL
 Uziel (UZL)|50|UZL-3S(S)
+Uziel (UZL)|50|UZL-3P(C)
 Bushwacker (BSW)|55|BSW-P1
 Bushwacker (BSW)|55|BSW-P2
 Bushwacker (BSW)|55|BSW-S2
@@ -463,6 +503,7 @@ Bushwacker (BSW)|55|BSW-X1
 Bushwacker (BSW)|55|BSW-X2
 High Roller|55|BSR-HR
 Bushwacker (BSW)|55|BSW-X1(S)
+Bushwacker (BSW)|55|BSW-S2(C)
 Griffin (GRF)|55|GRF-1N
 Griffin (GRF)|55|GRF-1S
 Griffin (GRF)|55|GRF-2N
@@ -472,10 +513,12 @@ Sparky|55|GRF-S
 Sparky|55|GRF-AR
 Griffin (GRF)|55|GRF-1N(P)
 Griffin (GRF)|55|GRF-5M(L)
+Griffin (GRF)|55|GRF-1S(C)
 Kintaro (KTO)|55|KTO-18
 Kintaro (KTO)|55|KTO-19
 Kintaro (KTO)|55|KTO-20
 Golden Boy|55|KTO-GB
+Kintaro (KTO)|55|KTO-18(C)
 Shadow Hawk (SHD)|55|SHD-2D
 Shadow Hawk (SHD)|55|SHD-2D2
 Shadow Hawk (SHD)|55|SHD-2H
@@ -483,6 +526,7 @@ Shadow Hawk (SHD)|55|SHD-2K
 Shadow Hawk (SHD)|55|SHD-5M
 Gray Death|55|SHD-GD
 Shadow Hawk (SHD)|55|SHD-2H(P)
+Shadow Hawk (SHD)|55|SHD-2H(C)
 Wolverine (WVR)|55|WVR-6K
 Wolverine (WVR)|55|WVR-6R
 Wolverine (WVR)|55|WVR-7D
@@ -490,6 +534,7 @@ Wolverine (WVR)|55|WVR-7K
 Qauarantine|55|WVR-Q
 Wolverine (WVR)|55|WVR-6R(P)
 Wolverine (WVR)|55|WVR-7D(L)
+Wolverine (WVR)|55|WVR-6K(C)
 Arctic Wolf (ACW)|40|ACW-PRIME
 Arctic Wolf (ACW)|40|ACW-1
 Arctic Wolf (ACW)|40|ACW-2
@@ -520,6 +565,7 @@ Shadow Cat (SHC)|45|SHC-P
 Mishipeshu|45|SHC-MS
 Shadow Cat (SHC)|45|SHC-PRIME(I)
 Shadow Cat (SHC)|45|SHC-PRIME(S)
+Shadow Cat (SHC)|45|SHC-PRIME(C)
 Hunchback-IIC (HBK-IIC)|50|HBK-IIC
 Hunchback-IIC (HBK-IIC)|50|HBK-IIC-A
 Hunchback-IIC (HBK-IIC)|50|HBK-IIC-B
@@ -531,7 +577,7 @@ Huntsman (HMN)|50|HMN-A
 Huntsman (HMN)|50|HMN-B
 Huntsman (HMN)|50|HMN-C
 Huntsman (HMN)|50|HMN-P
-Pakhet|50|HMN-PK
+Pakhet|50|HMN-PA
 Huntsman (HMN)|50|HMN-PRIME(S)
 Nova (NVA)|50|NVA-PRIME
 Nova (NVA)|50|NVA-A
@@ -543,6 +589,7 @@ Breaker|50|NVA-BR
 Nova (NVA)|50|NVA-PRIME(G)
 Nova (NVA)|50|NVA-PRIME(I)
 Nova (NVA)|50|NVA-D(L)
+Nova (NVA)|50|NVA-S(C)
 Black Lanner (BKL)|55|BKL-PRIME
 Black Lanner (BKL)|55|BKL-A
 Black Lanner (BKL)|55|BKL-C
@@ -559,6 +606,7 @@ Lacerator|55|SCR-LC
 Stormcrow (SCR)|55|SCR-PRIME(G)
 Stormcrow (SCR)|55|SCR-PRIME(I)
 Stormcrow (SCR)|55|SCR-PRIME(S)
+Stormcrow (SCR)|55|SCR-PRIME(C)
 Vapor Eagle (VGL)|55|VGL-1
 Vapor Eagle (VGL)|55|VGL-2
 Vapor Eagle (VGL)|55|VGL-3
@@ -566,6 +614,7 @@ Vapor Eagle (VGL)|55|VGL-4
 Vapor Eagle (VGL)|55|VGL-A
 Rival|55|VGL-RI
 Vapor Eagle (VGL)|55|VGL-1(S)
+Vapor Eagle (VGL)|55|GRF-5M(L)
 Flea (FLE)|20|FLE-15
 Flea (FLE)|20|FLE-17
 Flea (FLE)|20|FLE-19
@@ -580,17 +629,19 @@ Locust (LCT)|20|LCT-3S
 Locust (LCT)|20|LCT-3V
 Pirates' Bane|20|LCT-PB
 Locust (LCT)|20|LCT-1V(P)
+Locust (LCT)|20|LCT-1E(C)
 Commando (COM)|25|COM-1B
 Commando (COM)|25|COM-1D
 Commando (COM)|25|COM-2D
 Commando (COM)|25|COM-3A
 The Death's Knell|25|COM-TDK
+Commando (COM)|25|COM-1D(C)
 Javelin (JVN)|30|JVN-10F
 Javelin (JVN)|30|JVN-10N
 Javelin (JVN)|30|JNV-10P
 Javelin (JVN)|30|JVN-11A
 Javelin (JVN)|30|JVN-11B
-Hi Ther|30|HI THERE
+Hi There|30|HI THERE
 Javelin (JVN)|30|JVN-10N(S)
 Osiris (OSR)|30|OSR-1P
 Osiris (OSR)|30|OSR-1V
@@ -599,10 +650,12 @@ Osiris (OSR)|30|OSR-3D
 Osiris (OSR)|30|OSR-4D
 Sekhmet|30|OSR-SK
 Osiris (OSR)|30|OSR-3D(S)
+Osiris (OSR)|30|OSR-1V(C)
 Spider (SDR)|30|SDR-5D
 Spider (SDR)|30|SDR-5K
 Spider (SDR)|30|SDR-5V
 Anasi|30|SDR-A
+Spider (SDR)|30|SDR-5K(C)
 Urbanmech (UM)|30|UM-R60
 Urbanmech (UM)|30|RM-R60L
 Urbanmech (UM)|30|UM-R63
@@ -617,12 +670,14 @@ Firestarter (FS9)|35|FS9-K
 Firestarter (FS9)|35|FS9-S
 Ember|35|FS9-E
 Ember|35|FS9-FS
+Firestarter (FS9)|35|FS9-S(C)
 Jenner (JR7)|35|JR7-D
 Jenner (JR7)|35|JR7-F
 Jenner (JR7)|35|JR7-K
 Oxide|35|JR7-O
 Jenner (JR7)|35|JR7-D(F)
 Jenner (JR7)|35|JR7-D(S)
+Jenner (JR7)|35|JR7-F(C)
 Panther (PNT)|35|PNT-8Z
 Panther (PNT)|35|PNT-9R
 Panther (PNT)|35|PNT-10K
@@ -630,17 +685,20 @@ Panther (PNT)|35|PNT-10P
 Katana Kat|35|PNT-KK
 Panther (PNT)|35|PNT-10K(R)
 Panther (PNT)|35|PNT-10K(S)
+Panther (PNT)|35|PNT-10K(C)
 Raven (RVN)|35|RVN-2X
 Raven (RVN)|35|RVN-3L
 Raven (RVN)|35|RVN-4X
 Huginn|35|RVN-H
 Raven (RVN)|35|RVN-3L(S)
+Raven (RVN)|35|RVN-3L(C)
 Wolfhound (WLF)|35|WLF-1
 Wolfhound (WLF)|35|WLF-1A
 Wolfhound (WLF)|35|WLF-1B
 Wolfhound (WLF)|35|WLF-2
 Grinner|35|WLF-GR
 Wolfhound (WLF)|35|WLF-2(R)
+Wolfhound (WLF)|35|WLF-1(C)
 Piranha (PIR)|20|PIR-1
 Piranha (PIR)|20|PIR-2
 Piranha (PIR)|20|PRI-3
@@ -657,6 +715,7 @@ Mist Lynx (MLX)|25|MLX-G
 Ebon Dragoon|25|MLX-ED
 Mist Lynx (MLX)|25|MLX-PRIME(I)
 Mist Lynx (MLX)|25|MLX-PRIME(S)
+Mist Lynx (MLX)|25|MLX-PRIME(C)
 Arctic Cheetah (ACH)|30|ACH-PRIME
 Arctic Cheetah (ACH)|30|ACH-A
 Arctic Cheetah (ACH)|30|ACH-B
@@ -665,6 +724,7 @@ Arctic Cheetah (ACH)|30|ACH-E
 Shard|30|ACH-SD
 Arctic Cheetah (ACH)|30|ACH-PRIME(I)
 Arctic Cheetah (ACH)|30|ACH-PRIME(S)
+Arctic Cheetah (ACH)|30|ACH-PRIME(C)
 Kit Fox (KFX)|30|KFX-PRIME
 Kit Fox (KFX)|30|KFX-C
 Kit Fox (KFX)|30|KFX-D
@@ -688,6 +748,7 @@ Adder (ADR)|35|ADR-D
 Cinder|35|ADR-CN
 Adder (ADR)|35|ADR-PRIME(G)
 Adder (ADR)|35|ADR-PRIME(I)
+Adder (ADR)|35|ADR-PRIME(C)
 Cougar (COU)|35|COU-PRIME
 Cougar (COU)|35|COU-C
 Cougar (COU)|35|COU-D
@@ -701,3 +762,4 @@ Jenner IIC (JR7-IIC)|35|JR7-IIC-3
 Jenner IIC (JR7-IIC)|35|JR7-IIC-A
 Fury|35|JR7-IIC-FY
 Jenner IIC (JR7-IIC)|35|JR7-IIC(O)
+Jenner IIC (JR7-IIC)|35|MLX-PRIME(I)

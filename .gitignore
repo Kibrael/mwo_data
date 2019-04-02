@@ -4,3 +4,4 @@ data/.DS_Store
 data/images	
 data/
 output/
+__pycache__/

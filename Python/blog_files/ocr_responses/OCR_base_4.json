@@ -1,0 +1,15 @@
+{
+  "TextDetections": [],
+  "ResponseMetadata": {
+    "RequestId": "fbcf8140-4dcf-11e9-a853-b7ed1bc59f9f",
+    "HTTPStatusCode": 200,
+    "HTTPHeaders": {
+      "content-type": "application/x-amz-json-1.1",
+      "date": "Sun, 24 Mar 2019 00:58:49 GMT",
+      "x-amzn-requestid": "fbcf8140-4dcf-11e9-a853-b7ed1bc59f9f",
+      "content-length": "21",
+      "connection": "keep-alive"
+    },
+    "RetryAttempts": 0
+  }
+}

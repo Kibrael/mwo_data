@@ -110,9 +110,9 @@ class mwoImageSlicer(object):
 		}
 		print("horizontal slicing")
 		h_slices = self.slice_image_horizontal(img)
-
+		print("vertical slicing")
 		for i in range(len(h_slices)):
-			print("vertical slicing")
+			
 			player_row_imgs = self.slice_image_vertical(h_slices[i])
 			
 			if save_img:
@@ -256,7 +256,7 @@ class mwoImageSlicer(object):
 		return img
 
 
-	def slice_image_horizontal(self, img):
+	def slice_image_horizontal(self, img, save_img=False):
 		"""
 			Cuts a MWO scorecard screen capture into 24 horizontal segments, 1 for each player
 			These rectangles are further cut by slice_image_veritcal() before being sent to AWS Rekognition for OCR
@@ -283,6 +283,10 @@ class mwoImageSlicer(object):
 			for player_area in self.score_1680_1050:
 			    player_images.append(img.crop(player_area))
 			    #img.crop(player_area).show()
+			if save_img:
+				for i in range(len(player_images)):
+					player_images[i].save("../data/test_data/horizontal_slice_{}.jpg".format(str(i)))
+			
 			return player_images
 
 		else:

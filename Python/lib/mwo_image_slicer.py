@@ -91,7 +91,7 @@ class mwoImageSlicer(object):
 			img_df = self.img_to_dataframe(img, mwo_img, save_df=True)
 			#save
 
-	def img_to_dataframe(self, img, img_name, save_img=False, save_df=False):
+	def img_to_dataframe(self, img, img_name, save_img=False, thresh=False, save_df=False):
 		"""
 		Uses AWS Rekognition to parse images from MWO screenshots
 		Screenshots are split into single element components and resized before sending
@@ -121,15 +121,15 @@ class mwoImageSlicer(object):
 			
 			#get OCR for each image in player slice
 			print("OCR runnin on slice {} of {}".format(i, len(h_slices)))
-			match_dict["clan"].append(self.get_image_ocr(player_row_imgs[0])["text"])
-			match_dict["name"].append(self.get_image_ocr(player_row_imgs[1])["text"])
-			match_dict["mech"].append(self.get_image_ocr(player_row_imgs[2])["text"])
-			match_dict["status"].append(self.get_image_ocr(player_row_imgs[3])["text"])
-			match_dict["score"].append(self.get_image_ocr(player_row_imgs[4])["text"])
-			match_dict["kills"].append(self.get_image_ocr(player_row_imgs[5])["text"])
-			match_dict["assists"].append(self.get_image_ocr(player_row_imgs[6])["text"])
-			match_dict["damage"].append(self.get_image_ocr(player_row_imgs[7])["text"])
-			match_dict["ping"].append(self.get_image_ocr(player_row_imgs[8])["text"])
+			match_dict["clan"].append(self.get_image_ocr(player_row_imgs[0])["text"], thresh)
+			match_dict["name"].append(self.get_image_ocr(player_row_imgs[1])["text"], thresh)
+			match_dict["mech"].append(self.get_image_ocr(player_row_imgs[2])["text"], thresh)
+			match_dict["status"].append(self.get_image_ocr(player_row_imgs[3])["text"], thresh)
+			match_dict["score"].append(self.get_image_ocr(player_row_imgs[4])["text"], thresh)
+			match_dict["kills"].append(self.get_image_ocr(player_row_imgs[5])["text"], thresh)
+			match_dict["assists"].append(self.get_image_ocr(player_row_imgs[6])["text"], thresh)
+			match_dict["damage"].append(self.get_image_ocr(player_row_imgs[7])["text"], thresh)
+			match_dict["ping"].append(self.get_image_ocr(player_row_imgs[8])["text"], thresh)
 
 		print("converting to dataframe")
 		match_df = pd.DataFrame.from_dict(match_dict)
@@ -154,11 +154,29 @@ class mwoImageSlicer(object):
 		dataframe.to_csv(file_path+file_name[:-4] + ".txt", sep="|", index=False)
 
 
-	def get_image_ocr(self, img):
+	def grey_min_max(self, img, min_grey=185):
+		"""
+
+		"""
+		img = img.convert("L")
+		img_px = img.load()
+		for i in range(img.size[1]):
+			for j in range(img.size[0]):
+				if img_px[j,i] < min_grey:
+					img_px[j,i] = 0 
+				else:
+					img_px[j,i] = 255
+			img.save("../data/test_data/testpx.jpg")
+		return img
+
+
+	def get_image_ocr(self, img, thresh=False):
 		"""
 		Uses AWS Rekognition to get the text value from an image slice of a MWO screenshot
 		"""
 		img = self.resize_image(img)
+		if thresh:
+			img = self.grey_min_max(img)
 		#convert image to byte array for use with AWS Rekognition API
 		img_byte_arr = io.BytesIO()
 		img.save(img_byte_arr, format='PNG')

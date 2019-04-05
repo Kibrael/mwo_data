@@ -48,20 +48,21 @@ print("slicing image horizontally and saving slices to ../data/test_data/")
 h_slices = mwo_slicer.slice_image_horizontal(mwo_slicer.current_img, save_img=True) 
 
 #pass single horizontal slice of the screenshot to AWS and get result
-horizontal_slice = Image.open("../data/test_data/horizontal_slice_1.jpg")
+horizontal_slice = Image.open("../data/test_data/horizontal_slice_2.jpg")
 horizontal_slice_arr = convert_to_byte_array(horizontal_slice)
-horizontal_slice_arr_ocr_resp = client.detect_text(Image={"Bytes":horizontal_slice_arr})
+horizontal_slice_ocr_resp = client.detect_text(Image={"Bytes":horizontal_slice_arr})
 print("writing JSON response to file")
 with open("blog_files/ocr_responses/single_line_ocr_resp.json", "w") as outfile:
-	json.dump(horizontal_slice_arr_ocr_resp, outfile)
+	json.dump(horizontal_slice_ocr_resp, outfile)
+
 
 #show output of API text detection
-print(horizontal_slice_arr_ocr_resp)
+#print(horizontal_slice_arr_ocr_resp)
 
 #get detected words from OCR response
 text_line = []
 text_words = []
-for text_detected in horizontal_slice_arr_ocr_resp["TextDetections"]:
+for text_detected in horizontal_slice_ocr_resp["TextDetections"]:
 	#print(text_detected["DetectedText"])
 	if text_detected["Type"] == "LINE":
 		text_line.append(text_detected["DetectedText"])
@@ -70,3 +71,31 @@ for text_detected in horizontal_slice_arr_ocr_resp["TextDetections"]:
 
 print("line text \n", text_line)
 print("words text \n", text_words)
+
+## consider removing belwo this line
+
+
+#greyscale and threshold horizontal image
+print("converting image to greyscale and threshing")
+horizontal_slice_grey = grey_min_max(horizontal_slice)
+horizontal_slice_grey_arr = convert_to_byte_array(horizontal_slice_grey)
+horizontal_slice_grey_ocr_resp = client.detect_text(Image={"Bytes":horizontal_slice_grey_arr})
+
+#get detected words from OCR response
+text_line = []
+text_words = []
+for text_detected in horizontal_slice_grey_ocr_resp["TextDetections"]:
+	#print(text_detected["DetectedText"])
+	if text_detected["Type"] == "LINE":
+		text_line.append(text_detected["DetectedText"])
+	elif text_detected["Type"] == "WORD":
+		text_words.append(text_detected["DetectedText"])
+
+print("writing JSON response to file")
+with open("blog_files/ocr_responses/single_line_grey_ocr_resp.json", "w") as outfile:
+	json.dump(horizontal_slice_grey_ocr_resp, outfile)
+
+
+print("showing image before and after grey scale and threshold modifications")
+horizontal_slice.show()
+horizontal_slice_grey.show()

@@ -67,6 +67,13 @@ class mwoImageSlicer(object):
 
 	def main(self, redo=False):
 		"""
+		Creates a list of all images in a directory
+		Slices the images into cells
+		Calls AWS Rekognition to get text for each image cell
+		Compiles the cells into a dataframe
+		Saves the dataframe
+
+		Setting redo=True will repeat the process for images that have already been converted to dataframes
 		"""
 		#get list of images from directory
 		img_list = self.get_files_in_folder()
@@ -89,13 +96,132 @@ class mwoImageSlicer(object):
 			#convert to dataframe
 			print("converting to dataframe {} of {}".format(img_list.index(mwo_img), len(img_list)))
 			img_df = self.img_to_dataframe(img, mwo_img, save_df=True)
-			#save
+			
 
-	def img_to_dataframe(self, img, img_name, save_img=False, thresh=False, save_df=False):
+	def img_to_dataframe_h(self, img, save_img=False, resize=True, thresh=False, save_df=False, save_name="test_df.txt", filepath=None):
+		"""
+		Uses AWS Rekognition to parse images from MWO screenshots
+		Screenshots are split horizontal components (1 per player0 and resized before sending
+		The resulting text is assembled into a dataframe that matches the MWO scorecard
+		
+		img is the image to be processed
+		Setting thresh=True will greyscale by calling the grey_min_max() function to threshold each image before sending to AWS
+		Setting save_df=True saves the resulting dataframe as a pipe-delimited text file
+		Setting save_img=True will save the image slices to ../data/test_data/
+		"""
+		match_dict = {
+						"clan":[],
+						"name":[],
+	            		"mech":[],
+	            		"status":[],
+	            		"score":[],
+	            		"kills":[],
+	            		"assists":[],
+	            		"damage":[], 
+	            		"ping":[]
+		}
+
+		print("horizontal slicing")
+		h_slices = self.slice_image_horizontal(img)
+		
+		#save, resize, and threshold images if option was selected
+		for i in range(len(h_slices)):
+			if thresh: #threshold images prior to OCR
+				#print("greyscaling and thresholding image")
+					h_slices[i] = self.grey_min_max(h_slices[i])
+			#resizing images prior to OCR
+			if resize:
+				h_slices[i] = self.resize_image(h_slices[i], mode="height")
+			if save_img:
+					h_slices[i].save("../data/test_data/"+"h_slice"+str(i)+"_.jpg")
+			
+		for i in range(len(h_slices)):
+			#get OCR for each image in player slice
+			player_row_ocr_resp = self.get_image_ocr(img=h_slices[i], full_resp=True, size=False, show=False)
+			
+			#get words from OCR reponse JSON
+			text_words = []
+			for text_detected in player_row_ocr_resp["TextDetections"]:
+				#Use only "Word" data from the TextDetections object
+				if text_detected["Type"] == "WORD":
+					text_words.append(text_detected["DetectedText"]) #list of words that should have positional alignment to the match_dict
+			print()
+			print(text_words)
+			if len(text_words) == 9:
+				match_dict["clan"].append(text_words[0])
+				match_dict["name"].append(text_words[1])
+				match_dict["mech"].append(text_words[2])
+				match_dict["status"].append(text_words[3])
+				match_dict["score"].append(text_words[4])
+				match_dict["kills"].append(text_words[5])
+				match_dict["assists"].append(text_words[6])
+				match_dict["damage"].append(text_words[7])
+				match_dict["ping"].append(text_words[8])
+				
+			elif len(text_words) == 8:
+				print("incorrect number of words detected, attempting to omit clan and reposition")
+				#omit clan data from match_dict as it is not required for a player to have a clan
+				match_dict["clan"].append("NAN")
+				match_dict["name"].append(text_words[0])
+				match_dict["mech"].append(text_words[1])
+				match_dict["status"].append(text_words[2])
+				match_dict["score"].append(text_words[3])
+				match_dict["kills"].append(text_words[4])
+				match_dict["assists"].append(text_words[5])
+				match_dict["damage"].append(text_words[6])
+				match_dict["ping"].append(text_words[7])
+			elif len(text_words) == 10:
+				print("incorrect number of words detected, attempting to combine player name pieces")
+				#combine 2nd and 3rd items. Assumption is that player name contained a space
+				match_dict["clan"].append(text_words[0])
+				match_dict["name"].append(text_words[1]+text_words[2])
+				match_dict["mech"].append(text_words[3])
+				match_dict["status"].append(text_words[4])
+				match_dict["score"].append(text_words[5])
+				match_dict["kills"].append(text_words[6])
+				match_dict["assists"].append(text_words[7])
+				match_dict["damage"].append(text_words[8])
+				match_dict["ping"].append(text_words[9])
+			elif len(text_words) == 11:
+				print("incorrect number of words detected, attempting to combine player name pieces")
+				#combine 2nd and 3rd items. Assumption is that player name contained a space
+				match_dict["clan"].append(text_words[0])
+				match_dict["name"].append(text_words[1]+text_words[2]+text_words[3])
+				match_dict["mech"].append(text_words[4])
+				match_dict["status"].append(text_words[5])
+				match_dict["score"].append(text_words[6])
+				match_dict["kills"].append(text_words[7])
+				match_dict["assists"].append(text_words[8])
+				match_dict["damage"].append(text_words[9])
+				match_dict["ping"].append(text_words[10])
+
+			else:
+				print("unsure what to do here yet")
+				print(text_words)
+
+		print("converting to dataframe")
+		#print(match_dict)
+		match_df = pd.DataFrame.from_dict(match_dict)
+		match_df = match_df[["clan", "name", "mech", "status", "score", "kills", 
+							 "assists", "damage", "ping"]]
+		if save_df:
+			print("saving dataframe to", filepath, save_name)
+			self.save_dataframe(match_df, save_name, filepath)
+
+		return match_df
+
+
+	def img_to_dataframe(self, img, save_img=False, resize=True, thresh=False, save_df=False):
 		"""
 		Uses AWS Rekognition to parse images from MWO screenshots
 		Screenshots are split into single element components and resized before sending
 		The resulting text is assembled into a dataframe that matches the MWO scorecard
+
+		img is the image to be processed
+		Setting thresh=True will greyscale by calling the grey_min_max() function to threshold each image before sending to AWS
+		Setting save_df=True saves the resulting dataframe as a pipe-delimited text file
+		Setting save_img=True will save the image slices to ../data/test_data/
+		
 		"""
 		match_dict = {
 						"clan":[],
@@ -118,26 +244,35 @@ class mwoImageSlicer(object):
 			if save_img:
 				for j in range(len(player_row_imgs)):
 					player_row_imgs[j].save("../data/test_data/"+"player_img"+str(j)+"_"+str(i)+".jpg")
-			
+			#resize images prior to OCR
+			if resize:
+				for i in len(player_row_imgs):
+					player_row_imgs[i] = self.resize_image(player_row_imgs[i], mode="width")
+
+			#threshold images prior to OCR
+			if thresh:
+				for i in len(player_row_imgs):
+					player_row_imgs[i] = self.grey_min_max(player_row_imgs[i])
 			#get OCR for each image in player slice
 			print("OCR runnin on slice {} of {}".format(i, len(h_slices)))
-			match_dict["clan"].append(self.get_image_ocr(player_row_imgs[0], thresh)["text"])
-			match_dict["name"].append(self.get_image_ocr(player_row_imgs[1], thresh)["text"])
-			match_dict["mech"].append(self.get_image_ocr(player_row_imgs[2], thresh)["text"])
-			match_dict["status"].append(self.get_image_ocr(player_row_imgs[3], thresh=False)["text"])
-			match_dict["score"].append(self.get_image_ocr(player_row_imgs[4], thresh)["text"])
-			match_dict["kills"].append(self.get_image_ocr(player_row_imgs[5], thresh)["text"])
-			match_dict["assists"].append(self.get_image_ocr(player_row_imgs[6], thresh)["text"])
-			match_dict["damage"].append(self.get_image_ocr(player_row_imgs[7], thresh)["text"])
-			match_dict["ping"].append(self.get_image_ocr(player_row_imgs[8], thresh)["text"])
+			match_dict["clan"].append(self.get_image_ocr(player_row_imgs[0])["text"])
+			match_dict["name"].append(self.get_image_ocr(player_row_imgs[1])["text"])
+			match_dict["mech"].append(self.get_image_ocr(player_row_imgs[2])["text"])
+			#threshing the status column removes "dead" entries as those are shown in red
+			match_dict["status"].append(self.get_image_ocr(player_row_imgs[3])["text"])
+			match_dict["score"].append(self.get_image_ocr(player_row_imgs[4])["text"])
+			match_dict["kills"].append(self.get_image_ocr(player_row_imgs[5])["text"])
+			match_dict["assists"].append(self.get_image_ocr(player_row_imgs[6])["text"])
+			match_dict["damage"].append(self.get_image_ocr(player_row_imgs[7])["text"])
+			match_dict["ping"].append(self.get_image_ocr(player_row_imgs[8])["text"])
 
 		print("converting to dataframe")
 		match_df = pd.DataFrame.from_dict(match_dict)
 		match_df = match_df[["clan", "name", "mech", "status", "score", "kills", 
 							 "assists", "damage", "ping"]]
 		if save_df:
-			print("saving dataframe")
-			self.save_dataframe(match_df, img_name)
+			print("saving dataframe to ", filepath, save_name)
+			self.save_dataframe(match_df, self.image_name)
 
 		return match_df
 
@@ -146,6 +281,7 @@ class mwoImageSlicer(object):
 		"""
 		Saves a dataframe to pipe-delimited text format
 		"""
+
 		if not file_path:
 			file_path = self.data_save
 
@@ -156,8 +292,10 @@ class mwoImageSlicer(object):
 
 	def grey_min_max(self, img, min_grey=185):
 		"""
-
+		Sets all pixels below min_grey to black
+		Sets all pixesl above min_grey to white
 		"""
+
 		img = img.convert("L")
 		img_px = img.load()
 		for i in range(img.size[1]):
@@ -170,13 +308,15 @@ class mwoImageSlicer(object):
 		return img
 
 
-	def get_image_ocr(self, img, thresh=False):
+	def get_image_ocr(self, img, full_resp=False, show=False, size=False):
 		"""
 		Uses AWS Rekognition to get the text value from an image slice of a MWO screenshot
+		This function only returns a single word (it was designed for getting text resonse from a single cell of an image)
 		"""
-		img = self.resize_image(img)
-		if thresh:
-			img = self.grey_min_max(img)
+		if show:
+			img.show()
+		if size:
+			print(img.size)
 		#convert image to byte array for use with AWS Rekognition API
 		img_byte_arr = io.BytesIO()
 		img.save(img_byte_arr, format='PNG')
@@ -196,16 +336,18 @@ class mwoImageSlicer(object):
 							"text":"",
 							"confidence":0
 			}
-
-		return resp_text
+		if full_resp:
+			return response
+		else:
+			return resp_text
 
 
 	def download_images(self, url, download_folder):
 		"""
-			Downloads files from a target site
-
-
+		This does not currently function
+		Downloads files from a target site
 		"""
+
 		grid_url = "https://steamcommunity.com/profiles/76561198090389241/screenshots/?appid=342200&sort=newestfirst&browsefilter=myfiles&view=grid"
 #				    https://steamcommunity.com/profiles/76561198090389241/screenshots/?p=2&appid=342200&sort=newestfirst&browsefilter=myfiles&view=grid&privacy=14
 
@@ -256,23 +398,32 @@ class mwoImageSlicer(object):
 
 		img = Image.open(folder_path+image)
 		self.current_img = img
+		self.image_name = image
 		return img
 
 
-	def resize_image(self, img, new_width=300, print_size=False):
+	def resize_image(self, img, mode="width", new_base=300, print_size=False):
 		"""
-			Resizes an image while maintaining aspect ratio
-			new_width is the new width of the image in pixels
-			height will be set based on the aspect ratio and the passed width parameter
+		Resizes an image while maintaining aspect ratio
+
+		new_width is the new width of the image in pixels
+		height will be set based on the aspect ratio and the passed width parameter
 		"""
+		if mode == "width":
+			width_pct = (new_base / float(img.size[0])) #get new width as a percent of old width for aspect ratio 
+			new_height = int((float(img.size[1])*float(width_pct))) #get new height based on new/old width percentage
+			img = img.resize((new_base, new_height), Image.ANTIALIAS) #resize image: AWS OCR needs minimum of 80x80 pixels
+			if print_size:
+				print("new size", img.size)
+			return img
 
-		width_pct = (new_width / float(img.size[0])) #get new width as a percent of old width for aspect ratio 
-		new_height = int((float(img.size[1])*float(width_pct))) #get new height based on new/old width percentage
-		img = img.resize((new_width, new_height), Image.ANTIALIAS) #resize image: AWS OCR needs minimum of 80x80 pixels
-		if print_size:
-			print("new size", img.size)
-		return img
-
+		elif mode == "height":
+			height_pct = (new_base / float(img.size[1]))
+			new_width = int((float(img.size[0])*float(height_pct)))
+			img = img.resize((new_width, new_base), Image.ANTIALIAS)
+			if print_size:
+				print("new size", img.size)
+			return img
 
 	def slice_image_horizontal(self, img, save_img=False):
 		"""

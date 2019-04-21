@@ -48,7 +48,8 @@ print("slicing image horizontally and saving slices to ../data/test_data/")
 h_slices = mwo_slicer.slice_image_horizontal(mwo_slicer.current_img, save_img=True) 
 
 #pass single horizontal slice of the screenshot to AWS and get result
-horizontal_slice = Image.open("../data/test_data/horizontal_slice_0.jpg")
+#the example blog uses row 1
+horizontal_slice = Image.open("../data/test_data/horizontal_slice_1.jpg")
 horizontal_slice_arr = convert_to_byte_array(horizontal_slice)
 horizontal_slice_ocr_resp = client.detect_text(Image={"Bytes":horizontal_slice_arr})
 
@@ -79,7 +80,7 @@ horizontal_slice_grey_arr = convert_to_byte_array(horizontal_slice_grey)
 horizontal_slice_grey_ocr_resp = client.detect_text(Image={"Bytes":horizontal_slice_grey_arr})
 
 print("writing JSON response to file")
-with open("blog_files/ocr_responses/single_line_grey_ocr_resp.json", "w") as outfile:
+with open("../output/blog_files/ocr_responses/single_line_grey_ocr_resp.json", "w") as outfile:
 	json.dump(horizontal_slice_grey_ocr_resp, outfile)
 
 #get detected words from OCR response
@@ -108,11 +109,15 @@ print("Creating full dataframe from horizontal screenshot slices")
 
 #create entire dataframe using horizontal slices
 #no greyscale or threshing
-horizontal_slice_df = mwo_slicer.img_to_dataframe_h(mwo_slicer.current_img, save_img=True, thresh=False, save_df=True)
+horizontal_slice_df = mwo_slicer.img_to_dataframe_h(mwo_slicer.current_img, save_img=True, thresh=False, 
+	save_df=True, save_name="h_method_df.txt", filepath="blog_files/dataframes/")
 print(horizontal_slice_df)
-
+print()
+print("*"*50)
+print("Creating full dataframe from horizontal screenshot slices using threshing method")
 #with greyscale and threshing
-horizontal_slice_thresh_df = mwo_slicer.img_to_dataframe_h(mwo_slicer.current_img, save_img=True, thresh=True, save_df=True)
+horizontal_slice_thresh_df = mwo_slicer.img_to_dataframe_h(mwo_slicer.current_img, save_img=True, thresh=True, 
+	save_df=True, save_name="h_method_threshed_df.txt", filepath="blog_files/dataframes/")
 print(horizontal_slice_thresh_df)
 
 ## Construct entire dataframe: first without resize and thresholding, second with resize and thresholding

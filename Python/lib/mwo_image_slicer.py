@@ -98,7 +98,8 @@ class mwoImageSlicer(object):
 			img_df = self.img_to_dataframe(img, mwo_img, save_df=True)
 			
 
-	def img_to_dataframe_h(self, img, save_img=False, resize=True, thresh=False, save_df=False, save_name="test_df.txt", filepath=None):
+	def img_to_dataframe_h(self, img, save_img=False, resize=True, thresh=False, save_df=False, 
+						save_name="test_df.txt", filepath=None):
 		"""
 		Uses AWS Rekognition to parse images from MWO screenshots
 		Screenshots are split horizontal components (1 per player0 and resized before sending
@@ -127,11 +128,12 @@ class mwoImageSlicer(object):
 		#save, resize, and threshold images if option was selected
 		for i in range(len(h_slices)):
 			if thresh: #threshold images prior to OCR
-				#print("greyscaling and thresholding image")
 					h_slices[i] = self.grey_min_max(h_slices[i])
+					
 			#resizing images prior to OCR
 			if resize:
 				h_slices[i] = self.resize_image(h_slices[i], mode="height")
+			
 			if save_img:
 					h_slices[i].save("../data/test_data/"+"h_slice"+str(i)+"_.jpg")
 			

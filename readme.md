@@ -29,7 +29,12 @@ To run the scripts below begin in the Python sub folder.
 
 - [Horizontal and vertical slicing combination](Python/split_screenshot_example.py): This example slices an image into individual cells and sends each cell individually to the Rekognition API. This method optimizes for data cleaning time at the expense of cost.
 `python split_screenshot_example.py`
-- Analysis powered by [kite](kite.com)
+
+- [Dataframe output from OCR](https://github.com/Kibrael/mwo_data/tree/master/output/blog_files/dataframes) contains text files of dataframes produced by the example code files
+- [Images of dataframe output from OCR](https://github.com/Kibrael/mwo_data/tree/master/output/blog_files/df_screenshots)
+*Analysis powered by [kite](kite.com)*
+
+
 
 ## Instructions
 - This project relies on [Python](https://www.python.org/downloads/) 3.7

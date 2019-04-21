@@ -196,7 +196,7 @@ class mwoImageSlicer(object):
 				match_dict["ping"].append(text_words[10])
 
 			else:
-				print("unsure what to do here yet")
+				print("text count does not match pattern, not adding to DF")
 				print(text_words)
 
 		print("converting to dataframe")

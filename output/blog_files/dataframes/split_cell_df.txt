@@ -1,0 +1,25 @@
+clan|name|mech|status|score|kills|assists|damage|ping
+|Trogdor roadorTheDudeBro|GAR-A|ALIVE|412|4 4|3|631|70
+[SRoT|codynyc|ARC-5W|ALIVE|342|1|8|512|11
+[SRoT|Davroslyrad|KGC-000|ALIVE|157|2|5|197|47
+[SRoX]|Novran|WHM-BW|DEAD|143|0 O|3|194|47
+|Yuri K Kerensky|GAR-A|ALIVE|518|1|7|809|41
+[FLH|Grymhound|SHC-PRIM PRIME(I)|DEAD|309|1|7 7|361|61
+[FLH]|Wolf Clearwater|SCR-PRIME|DEAD|136|0|8 8|136|82
+|Cynnful|EBJ-PR BJ-PRIMEC)|DEAD|106||4|111|60
+[CbR1]|HawaiianManiac|MAD-IIC-A|DEAD|358|21 2||655|110
+[CbR1]|Battle Duck|ARC-T|ALIVE|225|1||282|79
+|ProfessorFalken|KGC-O00B|DEAD|218||5|332|99
+[CbR1]|Melathross|KDK-3|DEAD|198||7|272|74
+[HUNC]|unclephillkill|UM- M-R68(L)|DEAD|278|O|3|503|45
+[TROL]|Parthonius Bloodstone|CTF-3D(C)|DEAD|277|0|4|558|49
+[HUNC]|Cylinder|STK-3 STK-3F(C)|DEAD|80|1|0|101|54
+[HUNC]|PCRusty|CRB-27B|DEAD|42|O||19|64
+[CWM]|Darkness Inside You|NVA-B|DEAD|660|5|1|1136|S92 92
+[CWM]|Blueribbon2000|CP-S|DEAD|267||3|495|63
+|MoongluM-|TBR-PRIME|DEAD|93|0||118|43
+[CWM|Lilferret|ASN-21|DEAD|65|||95|69
+[obs]|The rifle 541|ASN-101|DEAD|284|1|5|457|39
+[xSLx]|llyRoger|AWS-8R|DEAD|184||5|340|87
+[XSLx]|xCaTFiShx|MAD-IIC-D|DEAD|177|0||339|94
+[obs]|Spaceoddity36|MLX-G|DEAD|105|||186|44

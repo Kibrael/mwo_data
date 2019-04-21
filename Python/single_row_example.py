@@ -54,7 +54,7 @@ horizontal_slice_arr = convert_to_byte_array(horizontal_slice)
 horizontal_slice_ocr_resp = client.detect_text(Image={"Bytes":horizontal_slice_arr})
 
 print("writing JSON response to file")
-with open("blog_files/ocr_responses/single_line_ocr_resp.json", "w") as outfile:
+with open("../output/blog_files/ocr_responses/single_line_ocr_resp.json", "w") as outfile:
 	json.dump(horizontal_slice_ocr_resp, outfile)
 
 #get detected words from OCR response

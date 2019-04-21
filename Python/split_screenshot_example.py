@@ -12,7 +12,9 @@ from lib import mwo_image_slicer
 client = boto3.client('rekognition') #instantiate AWS client
 
 test_imgs_path = "E:/MWO/mwo_data/data/test_data/" #test images folder
-
+if not os.path.exists("../output/blog_files/dataframes"):
+    os.makedirs("../output/blog_files/dataframes")
+    
 def convert_to_byte_array(img):
 	"""
 	Converts an image file to a byte array for use with the 
@@ -52,6 +54,7 @@ ocr_df = mwo_slicer.img_to_dataframe(mwo_slicer.current_img, save_img=True,
 ocr_df.to_csv("../output/blog_files/dataframes/split_cell_df.txt", sep="|", index=False)
 print(ocr_df)
 print("saving DF results to text file")
+
 #create entire dataframe using cell splitting method
 #with greyscale and threshing
 ocr_thresh_df = mwo_slicer.img_to_dataframe(mwo_slicer.current_img, save_img=True, 

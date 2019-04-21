@@ -1,7 +1,7 @@
-import boto3
 import io
 import json
 
+import boto3
 import numpy as np 
 import pandas as pd
 import requests
@@ -12,7 +12,8 @@ from lib import mwo_image_slicer
 client = boto3.client('rekognition') #instantiate AWS client
 
 test_imgs_path = "E:/MWO/mwo_data/data/test_data/" #test images folder
-
+if not os.path.exists("../output/blog_files/dataframes"):
+    os.makedirs("../output/blog_files/dataframes")
 def convert_to_byte_array(img):
 	"""
 	Converts an image file to a byte array for use with the 

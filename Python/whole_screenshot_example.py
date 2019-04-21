@@ -1,7 +1,7 @@
-import boto3
 import io
 import json
 
+import boto3
 import numpy as np 
 import pandas as pd
 import requests
@@ -39,7 +39,6 @@ def grey_min_max(img, min_grey=185):
 	return img
 
 #pass entire image to AWS and get result
-#FIXME: split line from word results
 print("opening image")
 screenshot = Image.open("../data/images/20171118200711_1.jpg")
 screenshot_arr = convert_to_byte_array(screenshot)
@@ -49,7 +48,6 @@ screenshot_ocr_resp = client.detect_text(Image={"Bytes":screenshot_arr})
 print("writing JSON data to file")
 with open("../output/blog_files/ocr_responses/full_screenshot_ocr_resp.json", "w") as outfile:
 	json.dump(screenshot_ocr_resp, outfile)
-#print(screenshot_ocr_resp)
 
 
 text_line = []

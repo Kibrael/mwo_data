@@ -2,6 +2,7 @@ import boto3
 import io
 import json
 
+import os
 import numpy as np 
 import pandas as pd
 import requests

@@ -42,11 +42,14 @@ def grey_min_max(img, min_grey=185):
 print("loading image to slicer")
 mwo_slicer = mwo_image_slicer.mwoImageSlicer(client) #handles image slicing and OCR requests
 mwo_slicer.load_image(image="20171118200711_1.jpg") #set current image for handling
+
+
+#
 ocr_df = mwo_slicer.img_to_dataframe(mwo_slicer.current_img, save_img=True, 
 										thresh=True, save_df=True)
 
 print("saving results to text file")
 
-ocr_df.to_csv("../output/blog_files/threshed_df.txt", sep="|", index=False)
+ocr_df.to_csv("../output/blog_files/dataframes/split_cell_threshed_df.txt", sep="|", index=False)
 print(ocr_df)
 mwo_slicer.current_img.show()

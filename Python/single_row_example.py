@@ -110,14 +110,16 @@ print("Creating full dataframe from horizontal screenshot slices")
 #create entire dataframe using horizontal slices
 #no greyscale or threshing
 horizontal_slice_df = mwo_slicer.img_to_dataframe_h(mwo_slicer.current_img, save_img=True, thresh=False, 
-	save_df=True, save_name="h_method_df.txt", filepath="blog_files/dataframes/")
+	save_df=True, save_name="h_method_df.txt", filepath="../output/blog_files/dataframes/")
 print(horizontal_slice_df)
 print()
 print("*"*50)
 print("Creating full dataframe from horizontal screenshot slices using threshing method")
+
+#create entire dataframe using horizontal slices
 #with greyscale and threshing
 horizontal_slice_thresh_df = mwo_slicer.img_to_dataframe_h(mwo_slicer.current_img, save_img=True, thresh=True, 
-	save_df=True, save_name="h_method_threshed_df.txt", filepath="blog_files/dataframes/")
+	save_df=True, save_name="h_method_threshed_df.txt", filepath="../output/blog_files/dataframes/")
 print(horizontal_slice_thresh_df)
 
 ## Construct entire dataframe: first without resize and thresholding, second with resize and thresholding

@@ -1,7 +1,7 @@
 ### Table of Contents
-[Blog Examples](https://github.com/Kibrael/mwo_data#blog-examples)
-[Instructions](https://github.com/Kibrael/mwo_data#instructions)
-[Repository Structure](https://github.com/Kibrael/mwo_data#repository-structure)
+[Blog Examples](https://github.com/Kibrael/mwo_data#blog-examples)  
+[Instructions](https://github.com/Kibrael/mwo_data#instructions)  
+[Repository Structure](https://github.com/Kibrael/mwo_data#repository-structure)  
 
 ## MechWarrior Online Match Score Data Project
 Disclaimer: This project is not affiliated with [PGI](http://piranhagames.com/) or [MechWarrior](https://mwomercs.com/).

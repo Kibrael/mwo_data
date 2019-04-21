@@ -47,7 +47,7 @@ print("sending to API")
 screenshot_ocr_resp = client.detect_text(Image={"Bytes":screenshot_arr})
 
 print("writing JSON data to file")
-with open("blog_files/ocr_responses/full_screenshot_ocr_resp.json", "w") as outfile:
+with open("../output/blog_files/ocr_responses/full_screenshot_ocr_resp.json", "w") as outfile:
 	json.dump(screenshot_ocr_resp, outfile)
 #print(screenshot_ocr_resp)
 

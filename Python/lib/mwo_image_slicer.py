@@ -211,7 +211,8 @@ class mwoImageSlicer(object):
 		return match_df
 
 
-	def img_to_dataframe(self, img, save_img=False, resize=True, thresh=False, save_df=False):
+	def img_to_dataframe(self, img, save_img=False, resize=True, thresh=False, save_df=False, 
+		filepath="../output/df_from_img/"):
 		"""
 		Uses AWS Rekognition to parse images from MWO screenshots
 		Screenshots are split into single element components and resized before sending
@@ -246,13 +247,14 @@ class mwoImageSlicer(object):
 					player_row_imgs[j].save("../data/test_data/"+"player_img"+str(j)+"_"+str(i)+".jpg")
 			#resize images prior to OCR
 			if resize:
-				for i in len(player_row_imgs):
-					player_row_imgs[i] = self.resize_image(player_row_imgs[i], mode="width")
+				for j in range(len(player_row_imgs)):
+					player_row_imgs[j] = self.resize_image(player_row_imgs[j], mode="width")
 
 			#threshold images prior to OCR
 			if thresh:
-				for i in len(player_row_imgs):
-					player_row_imgs[i] = self.grey_min_max(player_row_imgs[i])
+				for j in range(len(player_row_imgs)):
+					player_row_imgs[j] = self.grey_min_max(player_row_imgs[j])
+
 			#get OCR for each image in player slice
 			print("OCR runnin on slice {} of {}".format(i, len(h_slices)))
 			match_dict["clan"].append(self.get_image_ocr(player_row_imgs[0])["text"])
@@ -271,13 +273,13 @@ class mwoImageSlicer(object):
 		match_df = match_df[["clan", "name", "mech", "status", "score", "kills", 
 							 "assists", "damage", "ping"]]
 		if save_df:
-			print("saving dataframe to ", filepath, save_name)
-			self.save_dataframe(match_df, self.image_name)
+			print("saving dataframe to ", filepath, self.image_name)
+			self.save_dataframe(match_df, file_name=self.image_name, file_path=filepath)
 
 		return match_df
 
 
-	def save_dataframe(self, dataframe, file_name, file_path=None):
+	def save_dataframe(self, dataframe, file_name, file_path):
 		"""
 		Saves a dataframe to pipe-delimited text format
 		"""

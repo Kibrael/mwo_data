@@ -31,7 +31,7 @@ To run the scripts below begin in the Python sub folder.
 `python split_screenshot_example.py`
 
 - [Dataframe output from OCR](https://github.com/Kibrael/mwo_data/tree/master/output/blog_files/dataframes) contains text files of dataframes produced by the example code files
-- [Images of dataframe output from OCR](https://github.com/Kibrael/mwo_data/tree/master/output/blog_files/df_screenshots)
+- [Images of dataframe output from OCR](https://github.com/Kibrael/mwo_data/tree/master/output/blog_files/df_screenshots) contains images of the dataframes produced by the example code files  
 *Analysis powered by [kite](kite.com)*
 
 

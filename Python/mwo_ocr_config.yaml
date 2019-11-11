@@ -1,0 +1,48 @@
+raw_image_path: ../data/images/
+initial_ocr_data: ../output/raw_ocr/
+cleaned_ocr_data: ../output/cleaned_ocr/
+test_image: 20171118200711_1.jpg
+
+test_data_path: ../data/test_data/
+test_output_image: ../data/test_data/testpx.jpg
+
+run_all_images: False
+rerun_images: False
+file_extension: jpg
+
+col_width_1600_1050:
+    clan_area: [567, 208, 619, 800]
+    name_area: [622, 208, 848, 800]
+    mech_area: [845, 208, 973, 800]
+    status_area: [970, 208, 1025, 800]
+    score_area: [1075, 208, 1150, 800]
+    kills_area: [1150, 208, 1225, 800]
+    assist_area: [1225, 208, 1275, 800]
+    dmg_area: [1275, 208, 1345, 800]
+    ping_area: [1340, 208, 1385, 800]
+
+row_heights_1600_1050:
+    p1: [0, 25]
+    p2: [23, 50]
+    p3: [45, 73]
+    p4: [68, 95]
+    p5: [93, 120]
+    p6: [118, 144]
+    p7: [142, 167]
+    p8: [165, 190]
+    p9: [188, 217]
+    p10: [215, 240]
+    p11: [236, 265]
+    p12: [261, 288]
+    p13: [288, 319]
+    p14: [315, 342]
+    p15: [338, 365]
+    p16: [363, 388]
+    p17: [386, 414]
+    p18: [412, 439]
+    p19: [433, 459]
+    p20: [456, 481]
+    p21: [483, 511]
+    p22: [510, 535]
+    p23: [533, 558]
+    p24: [556, 581]
